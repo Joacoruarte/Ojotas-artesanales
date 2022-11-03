@@ -1,0 +1,78 @@
+.containerLayout{
+    display: grid;
+    grid-template-rows: max-content minmax(100vh, 1fr) 10rem;
+    min-height: 100%;
+}
+
+.DivContainerHamburguerMenu{
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    justify-content: flex-end;
+    padding: 0;
+}
+
+.toggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 3px 0px 3px;
+    width: 2.468rem;
+    height: 2.469rem;
+}
+
+.toggle_line,
+.toggle_line::after, 
+.toggle_line::before{
+    position: relative;
+    width: 90%;
+    height: .2rem;
+    background-color: rgb(71 85 105) ;
+    border-radius: 5px;
+    transition: background 0.5s, top 0.5s, transform 0.5s;
+}
+
+.toggle_line::after, .toggle_line::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: -10px;
+}
+
+.toggle_line::before{
+    top: 10px;
+}
+
+.active .toggle_line{
+    background: transparent;
+}
+
+.active .toggle_line::after{
+    top:0;
+    transform: rotate(45deg);
+}
+.active .toggle_line::before{
+    top:0;
+    transform: rotate(-45deg);
+}
+
+
+.showCart{
+    display: block;
+    animation: appear .35s;
+}
+
+
+.hideCart{
+    display: none;
+}
+
+@keyframes appear{
+    0%{
+        transform: translate(300px);
+    }
+
+    100%{
+        transform: translateX(0px);
+    }
+}

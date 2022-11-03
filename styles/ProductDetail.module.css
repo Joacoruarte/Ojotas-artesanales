@@ -1,0 +1,56 @@
+.ContainerProductDetail{
+    width: 70rem;
+    padding: 1rem;
+    margin: 4.5rem auto 0rem auto;
+    /* border: 1px solid #000; */
+    min-height: 80vh;
+    max-height: max-content;
+}
+
+.containerDataOfProduct{
+    display: flex;
+    gap: 3rem;
+}
+
+.containerImage{
+    width: 550px;
+    height: 550px;
+}
+
+.containerImage > img{
+    width: 550px;
+    height: 550px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.containerRightProduct{
+    display: flex;
+    min-width: 300px;
+    flex-direction: column;
+}
+
+.containerRightProduct > h2{
+    text-transform: uppercase;
+    
+}
+
+@media (max-width: 1100px){
+    .ContainerProductDetail{
+        width: 50rem;
+    }
+}
+@media (max-width: 770px){
+    .ContainerProductDetail{
+        width: 85%;
+    }
+    .containerDataOfProduct{
+        flex-direction: column;
+    }
+    .containerImage{
+        width: 100%;
+    }
+    .containerImage > img{
+        width: 100%;
+    }
+}
