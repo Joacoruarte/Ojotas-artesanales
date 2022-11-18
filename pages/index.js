@@ -33,8 +33,12 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps() {
-  const response = await axios.get("/products")
-  const products = await response.data
+  try{
+    const response = await axios.get("/products")
+    const products = await response.data
+  }catch(error){
+    console.log(error)
+  }
 
   return {
     props: {
