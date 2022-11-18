@@ -16,7 +16,7 @@ export default function Login() {
   })
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post('/login' , { email: data.email, password: data.password })
+      const res = await axios.post('/api/login' , { email: data.email, password: data.password })
       if(res.data.token){
         localStorage.setItem("token" , res.data.token)
         router.push("/")

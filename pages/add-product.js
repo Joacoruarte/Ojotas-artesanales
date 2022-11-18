@@ -34,7 +34,7 @@ export default function CreateProducts() {
     e.preventDefault()
     if(validateFormForProduct({talles,img,select,stock})) return
     if(select === TAB_SELECT.MANUAL){
-        axios.post("/create-product",{
+        axios.post("/api/create-product",{
             ...product,
             img,
             talles,

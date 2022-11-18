@@ -46,11 +46,10 @@ export default function ProductDetail() {
     }
     
   }
-
   return (
     <>
     <Head>
-      <title>{product.name}</title>
+      <title>{product?.name}</title>
       <meta name="description" content="Ojota artesanal" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
@@ -68,7 +67,7 @@ export default function ProductDetail() {
                 {product && (
                   <>
                     {/* IMAGE PRODUCT DETAIL */}
-                    {product.img && (
+                    {product?.img && (
                       <>
                         <div className="sm:block hidden">
                           <div className={s.containerImage}>

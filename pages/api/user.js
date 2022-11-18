@@ -1,5 +1,8 @@
 import User from "../../models/User";
 import bcrypt from "bcrypt"
+import { dbConnect } from "../../utils/db";
+
+dbConnect()
 
 export default async function users(req , res){
     const { method } = req;

@@ -1,4 +1,7 @@
 import Product from "../../models/Product";
+import { dbConnect } from "../../utils/db";
+
+dbConnect()
 
 export default async function stock(req, res) {
     const { id } = req.body;

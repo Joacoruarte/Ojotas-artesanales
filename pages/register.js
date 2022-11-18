@@ -16,7 +16,7 @@ export default function Register() {
   })
 
   const onSubmit = async (data) => {
-    const user = await axios.post("/user", { 
+    const user = await axios.post("/api/user", { 
         name: data.name,
         email: data.email,
         password: data.password,

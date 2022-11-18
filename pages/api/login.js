@@ -1,6 +1,9 @@
 import User from "../../models/User";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import { dbConnect } from "../../utils/db";
+
+dbConnect()
 
 export default async function login(req, res) {
     const { method } = req;

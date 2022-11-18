@@ -16,6 +16,10 @@ export async function dbConnect () {
     console.log((await db).connection.db.databaseName)
 }
 
+// export async function isDbConnected () {
+
+// }
+
 mongoose.connection?.on("connected", () => {
     console.log("Mongodb is connected");
 })

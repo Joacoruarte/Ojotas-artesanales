@@ -1,6 +1,8 @@
 import axios from "axios";
 import Product from "../../models/Product.js";
+import { dbConnect } from "../../utils/db.js";
 
+dbConnect()
 
 export default async function succesPayment(req , res) {
     const { payment_id } = req.query
