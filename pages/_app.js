@@ -2,7 +2,8 @@ import CartProvider from "../Context/CartProvider";
 import "../styles/globals.css";
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.URI;
+
+axios.defaults.baseURL = process.env.URI_DEVELOP;
  
 function MyApp({ Component, pageProps }) {
   return (

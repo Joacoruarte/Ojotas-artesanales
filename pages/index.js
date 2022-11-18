@@ -32,9 +32,9 @@ export default function Home({products}) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await axios.get("/products")
-  const products = await res.data
+export async function getServerSideProps() {
+  let res = await fetch("http://localhost:3000/api/products")
+  let products = await res.json()
   return {
     props: {
       products

@@ -16,9 +16,9 @@ export async function dbConnect () {
     console.log((await db).connection.db.databaseName)
 }
 
-mongoose.connection.on("connected", () => {
+mongoose.connection?.on("connected", () => {
     console.log("Mongodb is connected");
 })
-mongoose.connection.on("error", (err) => {
+mongoose.connection?.on("error", (err) => {
     console.log(err);
 })
