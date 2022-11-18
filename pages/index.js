@@ -1,10 +1,20 @@
 import axios from "axios";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import styles from "../styles/Home.module.css";
  
 export default function Home({products}) {
+  const [products , setProducts] = useState(products)
+  useEffect(()=> {
+    const getProducts = async () => {
+      const res = await axios.get("/api/products")
+      setProducts(res.data)
+    }
+    getProducts()
+  }, [])
+
   return (
     <div>
       <Head>
@@ -30,14 +40,4 @@ export default function Home({products}) {
       </Layout>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  let res = await fetch("http://localhost:3000/api/products")
-  let products = await res.json()
-  return {
-    props: {
-      products
-    }
-  }
 }
