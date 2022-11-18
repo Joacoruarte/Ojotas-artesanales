@@ -33,6 +33,7 @@ yarn-error.log*
 .vercel
 
 .env
+package-lock.json
 
 # typescript
 *.tsbuildinfo
