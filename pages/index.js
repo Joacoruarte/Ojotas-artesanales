@@ -1,15 +1,10 @@
 import axios from "axios";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
-  useEffect(()=> {
-    axios.get("/products").then(res => setProducts(res.data)).catch(err => console.log(err))
-  }, [])
+export default function Home({products}) {
   return (
     <div>
       <Head>
@@ -20,7 +15,7 @@ export default function Home() {
 
       <Layout home={true}>
         <div className={`${styles.containerCards} gap-4 mx-auto px-9 mt-10`}>
-          {products.success && products.data.map((product, i) => (
+          {products && products.data.map((product, i) => (
               <Card
                 id={product._id}
                 key={i}
@@ -35,4 +30,14 @@ export default function Home() {
       </Layout>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await axios.get("/products")
+  const products = await res.data
+  return {
+    props: {
+      products
+    }
+  }
 }

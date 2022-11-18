@@ -2,7 +2,7 @@ import CartProvider from "../Context/CartProvider";
 import "../styles/globals.css";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://ojotas-artesanales-dnzr00cts-joacoruarte.vercel.app/api"
+axios.defaults.baseURL = process.env.URI;
  
 function MyApp({ Component, pageProps }) {
   return (
