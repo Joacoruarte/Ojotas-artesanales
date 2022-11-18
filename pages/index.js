@@ -3,7 +3,7 @@ import Head from "next/head";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import styles from "../styles/Home.module.css";
-
+ 
 export default function Home({products}) {
   return (
     <div>
