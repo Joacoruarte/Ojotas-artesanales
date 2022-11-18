@@ -6,7 +6,7 @@ import Layout from "../Components/Layout";
 import styles from "../styles/Home.module.css";
  
 export default function Home() {
-  const [products , setProducts] = useState(products)
+  const [products , setProducts] = useState([])
   useEffect(()=> {
     const getProducts = async () => {
       const res = await axios.get("/api/products")
