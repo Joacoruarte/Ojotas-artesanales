@@ -8,7 +8,7 @@ export default function Footer() {
             <div>
                 <h2 className='text-2xl font-bold'>Redes sociales</h2>
                 <div className='flex mt-4 sm:justify-start justify-center'>
-                    <a href='https://www.instagram.com/ojotas.artesanales_/' target="blank" className='flex items-center gap-2 hover:underline transition-all duration-300'><BsInstagram/> Ojotas artesanales</a>
+                    <a href='https://www.instagram.com/ojotas.artesanales_/' target="blank" className='flex items-center gap-2 hover:underline transition-all duration-300'><BsInstagram/>ojotas.artesanales_</a>
                 </div>
             </div>
             <span>&copy; Todos los derechos reservados</span>

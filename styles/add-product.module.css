@@ -1,0 +1,121 @@
+.containerForm{
+    width: 90%;
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 3rem;
+    min-height: 88vh;
+    max-height: max-content;
+    border-radius: 30px;
+    margin-top: 5rem;
+    margin: 5rem auto 0 auto;
+    place-content: center;
+    background-color: #F0F0F0;
+}
+
+.containerViewProduct{
+    width: 100%;
+    padding: 2rem;
+    min-height: 88vh;
+    border-radius: 30PX;
+    border: 1px solid #ccc;
+    background: #FDFDFD;
+}
+
+.imageProduct{
+    width: 100%;
+    object-fit: cover;
+    height: 90%;
+    border-radius: 20px;
+}
+
+.noHasImage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    height: 90%;
+}
+
+.noHasImage_title{
+    white-space: nowrap;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+.labelForInputUploadImage{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
+    background: #fdfdfd;
+    border: 1px dashed #ccc;
+    padding: 1rem;
+    font-family: 'Montserrat';
+    color: rgb(138, 138, 138);
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.labelForInputUploadImage:hover{
+    border: 1px dashed rgb(119, 118, 118);
+}
+
+.titleForInput{
+    font-family: 'Montserrat';
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.inputForm{
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+}
+
+.inputForm:focus{
+    box-shadow: none !important;
+    outline: none !important;
+    border-color: #444;
+}
+
+.inputFormNumeros{
+    text-align: center;
+    padding: 1rem;
+    width: 7rem;
+    border: 1px solid #ccc;
+}
+
+.inputFormNumeros:focus{
+    box-shadow: none !important;
+    outline: none !important;
+    border-color: #444;
+}
+
+@media (max-width: 1223px){
+    .noHasImage_title{
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 1000px){
+    .containerForm{
+        display: flex;
+        flex-direction: column;
+        height: 95%;
+    }
+
+    .containerViewProduct{
+        min-height: 60vh;
+    }
+}
+
+@media (max-width: 467px){
+    .labelForInputUploadImage{
+        font-size: 10px;
+    }
+    .noHasImage_title{
+        font-size: 1.3rem;
+    }
+}

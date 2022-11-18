@@ -9,7 +9,7 @@ function XIcon(props) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke={color}
-          className="w-6 h-6 transition-all duration-300"
+          className="w-6 h-6 cursor-pointer transition-all duration-300"
           onMouseEnter={()=> setColor("#444444")}
           onMouseLeave={()=> setColor("#000000")}
           {...props}

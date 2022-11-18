@@ -1,8 +1,7 @@
 .ContainerProductDetail{
     width: 70rem;
     padding: 1rem;
-    margin: 4.5rem auto 0rem auto;
-    /* border: 1px solid #000; */
+    margin: 4.5rem auto;
     min-height: 80vh;
     max-height: max-content;
 }
@@ -10,16 +9,18 @@
 .containerDataOfProduct{
     display: flex;
     gap: 3rem;
+    animation: isAppear .5s;
 }
 
 .containerImage{
-    width: 550px;
-    height: 550px;
+    width: 500px;
+    height: 500px;
 }
 
 .containerImage > img{
-    width: 550px;
-    height: 550px;
+    background-color: #ccc;
+    width: 500px;
+    height: 500px;
     object-fit: cover;
     object-position: center;
 }
@@ -34,6 +35,74 @@
     text-transform: uppercase;
     
 }
+
+.lds_ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+.lds_ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #444;
+    border-radius: 50%;
+    animation: lds_ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #444 transparent transparent transparent;
+}
+.lds_ring div:nth-child(1) {
+    animation-delay: -0.45s;    
+}
+.lds_ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds_ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+
+.lds_ring_small {
+    display: inline-block;
+    position: relative;
+    width: 10px;
+    height: 10px;
+  }
+.lds_ring_small div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -1.1rem;
+    margin: 8px;
+    border: 3px solid #b6b3b3;
+    border-radius: 50%;
+    animation: lds_ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #b6b3b3 transparent transparent transparent;
+}
+.lds_ring_small div:nth-child(1) {
+    animation-delay: -0.45s;    
+}
+.lds_ring_small div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds_ring_small div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds_ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+  
 
 @media (max-width: 1100px){
     .ContainerProductDetail{
@@ -52,5 +121,14 @@
     }
     .containerImage > img{
         width: 100%;
+    }
+}
+
+@keyframes isAppear{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
     }
 }

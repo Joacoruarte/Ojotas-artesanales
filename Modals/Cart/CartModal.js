@@ -1,13 +1,24 @@
+import axios from "axios";
 import Image from "next/image";
 import React, { useContext } from "react";
 import CartContext from "../../Context/CartContext";
 import Trash from "../../Icons/Trash";
 import XIcon from "../../Icons/XIcon";
 import s from "../../styles/CartModal.module.css";
-import { transformToDinero } from "../../utils";
+import { transformToDinero } from "../../utils/utils";
 
 export default function CartModal({ open, setOpenCart }) {
   const { cart , setCart} = useContext(CartContext)
+
+  const handleBuyProducts = async () => {
+    try {
+      const res = await axios.post("/mercado-pago" , { cart })
+      window.location.replace(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="flex flex-col">
 
@@ -35,8 +46,8 @@ export default function CartModal({ open, setOpenCart }) {
         </p>
       ) : ( 
         <div className="flex flex-col w-full bg-orange-700">
-          {cart.map((product) => (
-            <div className="flex gap-2 border-b py-2" key={product.id}>
+          {cart.map((product , i) => (
+            <div className="flex gap-2 border-b py-2" key={i}>
               <div className="">
                 <Image width={90} height={90} src={Array.isArray(product.img) ? product.img[0] : product.img} className="object-cover w-6 h-6 object-center"/>
               </div>
@@ -54,8 +65,8 @@ export default function CartModal({ open, setOpenCart }) {
 
               <div className="flex flex-1 justify-end">
                 <Trash className={s.trushIcon} onClick={()=> {
-                  localStorage.setItem("cart", JSON.stringify(cart.filter((item) => item.id !== product.id)))
-                  setCart(cart.filter((item) => item.id !== product.id))
+                  localStorage.setItem("cart", JSON.stringify(cart.filter((item) => item._id !== product._id)))
+                  setCart(cart.filter((item) => item._id !== product._id))
                 }}/>
               </div>
             </div>
@@ -66,13 +77,10 @@ export default function CartModal({ open, setOpenCart }) {
           </div>
 
           <div className='w-full hover:bg-[#444] bg-black transition-all duration-300 cursor-pointer flex items-center justify-center py-2'>
-              <p className='font-montserrat text-white font-extralight' onClick={()=> handleChange()}>INICIAR COMPRA</p>
+              <p className='font-montserrat text-white font-extralight' onClick={()=> handleBuyProducts()}>INICIAR COMPRA</p>
           </div>
         </div>
       )}
-
-
-
 
     </div>
   );

@@ -1,15 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import Link from 'next/link'
 import CartContext from '../Context/CartContext'
 import CartModal from '../Modals/Cart/CartModal'
 import s from "../styles/Layout.module.css"
-import XIcon from '../Icons/XIcon'
 
 const navigation = [
     { name: 'INICIO', href: '/', current: true },
     { name: 'CONTACTO', href: '/contacto', current: false },
+    { name: 'INICIAR SESION', href: '/login', current: false },
+    { name: 'REGISTRARSE', href: '/register', current: false },
 ]
 
 export default function Navbar({home}) {
@@ -17,12 +18,27 @@ export default function Navbar({home}) {
   const cart = useContext(CartContext)
   const [open, setOpen] = useState(false)
   const [openCart, setOpenCart] = useState(false)
+  const [token , setToken] = useState(false)
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY > 0);
     });
+
+    if(localStorage.getItem('token')){
+      setToken(true)
+    }
   }, [])
   
+  const hasToken = (item) => {
+    if(item.name === 'INICIAR SESION' && token){
+      return false
+    }
+    if(item.name === 'REGISTRARSE' && token){
+      return false
+    }
+    return true
+  }
+
   return (
     <div className=''>
         {/* PRINCIPIO DE LA NAVBAR */}
@@ -37,16 +53,23 @@ export default function Navbar({home}) {
                       <div className="flex items-center space-x-4">
                         {/* LINKS */}
                         <Link href="/"><a className='uppercase font-montserrat font-bold underline underline-offset-8'>Ojotas artesanales</a></Link>
-                        {navigation.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                          >
-                            <a className={'hover:bg-slate-800 transition-all text-black font-montserrat hover:text-white duration-300 hover:bg-opacity-75 text-xs rounded-md py-2 px-3 font-medium'}>
-                              {item.name}
-                            </a>
-                          </Link>
+                        {navigation.map((item , i) => (
+                          <Fragment key={i}>
+                            {hasToken(item) && (
+                              <Link
+                                key={i}
+                                href={item.href}
+                              >
+                                <a className={'hover:bg-slate-800 transition-all text-black font-montserrat hover:text-white duration-300 hover:bg-opacity-75 text-xs rounded-md py-2 px-3 font-medium'}>
+                                  {item.name}
+                                </a>
+                              </Link>
+                            )}
+                          </Fragment>
                         ))}
+                        {token && (
+                          <p className='hover:bg-slate-800 uppercase cursor-pointer transition-all text-black font-montserrat hover:text-white duration-300 hover:bg-opacity-75 text-xs rounded-md py-2 px-3 font-medium'>Estoy logueado papu</p>
+                        )}
                       </div>
                     </div>
                   </div>
