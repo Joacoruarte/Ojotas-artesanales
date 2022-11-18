@@ -69,7 +69,7 @@ export default function CreateProducts() {
     if(tab === TAB_SELECT.POR_ENCARGUE){
       setSelect(select !== TAB_SELECT.POR_ENCARGUE ? TAB_SELECT.POR_ENCARGUE: "")
     }
-  }
+  } 
 
   return (
     <Layout>
