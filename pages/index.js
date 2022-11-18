@@ -5,7 +5,7 @@ import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import styles from "../styles/Home.module.css";
  
-export default function Home({products}) {
+export default function Home() {
   const [products , setProducts] = useState(products)
   useEffect(()=> {
     const getProducts = async () => {
