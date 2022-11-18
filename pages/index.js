@@ -8,9 +8,12 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   const [products , setProducts] = useState([])
   useEffect(()=> {
-    const getProducts = async () => {
-      const res = await axios.get("/api/products")
-      setProducts(res.data)
+    const getProducts = () => {
+      axios.get("/api/products").then((res)=> {
+        setProducts(res.data) 
+      }).catch((err)=> {
+        alert("Error fetching products" , err)
+      })
     }
     getProducts()
   }, [])
