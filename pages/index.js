@@ -25,7 +25,7 @@ export default function Home() {
 
       <Layout home={true}>
         <div className={`${styles.containerCards} gap-4 mx-auto px-9 mt-10`}>
-          {products && products.data.map((product, i) => (
+          {products && products?.data?.map((product, i) => (
               <Card
                 id={product._id}
                 key={i}
