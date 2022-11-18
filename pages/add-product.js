@@ -8,6 +8,7 @@ import axios from "axios"
 import s from "../styles/add-product.module.css"
 import XIcon from '../Icons/XIcon'
 import ButtonForm from '../Components/ButtonForm'
+import Image from 'next/image'
 
 export const TAB_SELECT ={
   MANUAL: "Agruegar Manual",
@@ -76,7 +77,7 @@ export default function CreateProducts() {
         {/* PREVIEW IMAGE */}
         <div className={s.containerViewProduct}>
           <h3 className='w-full text-center -mt-5 text-xl font-montserrat font-bold underline mb-4'>Producto</h3>
-          {img  ? <img src={img} className={s.imageProduct} /> : (
+          {img  ? <Image width={550} height={700} alt="Foto de producto" layout="intrinsic" objectFit='cover' src={img} className={s.imageProduct} /> : (
             <div className={s.noHasImage}>
               <h3 className={`${s.noHasImage_title} -mt-8 uppercase font-montserrat font-bold underline underline-offset-8`}>Ojotas artesanales</h3>
               <p className='font-montserrat flex items-center gap-3'>Cargar producto <PlusIcon /></p>

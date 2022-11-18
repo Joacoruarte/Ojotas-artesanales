@@ -77,7 +77,7 @@ export default function ProductDetail() {
                         </div>
                         <div className="sm:hidden block">
                           <div className={s.containerImage}>
-                              <img src={product.img} alt={product.alt} />
+                              <Image width={450} height={450} objectFit="cover" layout="intrinsic"   src={product.img} alt={product.alt} />
                           </div>
                         </div>
                       </>

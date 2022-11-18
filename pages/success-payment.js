@@ -28,7 +28,7 @@ export default function SuccessPayment() {
             console.log(err)
         })
     }
-  }, [payment_id])
+  }, [payment_id , setCart])
   return (
     <Layout>
         {
@@ -48,7 +48,7 @@ export default function SuccessPayment() {
                     {products.length > 0 && products.map((product , i) => (
                         <div className="flex gap-2 border-b py-2" key={i}>
                             <div className="">
-                            <Image width={90} height={90} src={Array.isArray(product.img) ? product.img[0] : product.img} className="object-cover w-6 h-6 object-center"/>
+                                <Image width={90} height={90} alt={product.alt} src={Array.isArray(product.img) ? product.img[0] : product.img} className="object-cover w-6 h-6 object-center"/>
                             </div>
                             <div className={`w-[10rem] flex flex-col gap-2`}>
                             <span className="text-black text-sm font-montserrat">{product.name} <span className="text-xs">{"("}{product.color}{")"}</span></span>
