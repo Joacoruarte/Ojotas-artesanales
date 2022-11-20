@@ -5,7 +5,7 @@ import Layout from '../Components/Layout'
 import Image from 'next/image';
 import { transformToDinero } from '../utils/utils';
 import s from "../styles/success-payment.module.css"
-import CartContext from '../Context/CartContext';
+import CartContext from '../Context/CartContext/CartContext';
 
 export default function SuccessPayment() {
   const router = useRouter();

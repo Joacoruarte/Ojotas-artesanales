@@ -21,7 +21,7 @@ export default function Login() {
     if(user?.token) {
       router.push('/')
     }
-  }, [user])
+  }, [user , router])
 
   const onSubmit = async (data) => {
     try {
