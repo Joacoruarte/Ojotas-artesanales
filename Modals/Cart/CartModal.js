@@ -1,7 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
 import React, { useContext } from "react";
-import CartContext from "../../Context/CartContext";
+import CartContext from "../../Context/CartContext/CartContext";
 import Trash from "../../Icons/Trash";
 import XIcon from "../../Icons/XIcon";
 import s from "../../styles/CartModal.module.css";

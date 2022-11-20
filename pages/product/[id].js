@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import Layout from '../../Components/Layout'
-import CartContext from '../../Context/CartContext'
+import CartContext from '../../Context/CartContext/CartContext'
 import { useGetProductDetail } from '../../hooks/useGetProductDetail'
 import s from "../../styles/ProductDetail.module.css"
 import { transformToDinero } from "../../utils/utils.js"

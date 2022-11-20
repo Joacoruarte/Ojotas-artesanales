@@ -1,10 +1,13 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import UserProfile from "../Icons/UserProfile"
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import Link from 'next/link'
-import CartContext from '../Context/CartContext'
+import CartContext from '../Context/CartContext/CartContext'
 import CartModal from '../Modals/Cart/CartModal'
 import s from "../styles/Layout.module.css"
+import DropDown from './DropDown'
+import AuthContext from '../Context/AuthProvider/AuthContext'
 
 const navigation = [
     { name: 'INICIO', href: '/', current: true },
@@ -17,27 +20,25 @@ export default function Navbar({home}) {
   const [scroll, setScroll] = useState(false);
   const cart = useContext(CartContext)
   const [open, setOpen] = useState(false)
+  const [dropDown, setDropDown] = useState(false)
   const [openCart, setOpenCart] = useState(false)
-  const [token , setToken] = useState(false)
+  const { user , setUser } = useContext(AuthContext)
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY > 0);
     });
-
-    if(localStorage.getItem('token')){
-      setToken(true)
-    }
   }, [])
   
   const hasToken = (item) => {
-    if(item.name === 'INICIAR SESION' && token){
+    if(item.name === 'INICIAR SESION' && user?.token){
       return false
     }
-    if(item.name === 'REGISTRARSE' && token){
+    if(item.name === 'REGISTRARSE' && user?.token){
       return false
     }
     return true
   }
+
 
   return (
     <div className=''>
@@ -67,8 +68,10 @@ export default function Navbar({home}) {
                             )}
                           </Fragment>
                         ))}
-                        {token && (
-                          <p className='hover:bg-slate-800 uppercase cursor-pointer transition-all text-black font-montserrat hover:text-white duration-300 hover:bg-opacity-75 text-xs rounded-md py-2 px-3 font-medium'>Estoy logueado papu</p>
+                        {user?.token && (
+                          <div>
+                            <DropDown/>
+                          </div>
                         )}
                       </div>
                     </div>

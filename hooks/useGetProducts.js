@@ -1,26 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const useGetProductDetail = (id) => {
-    const [product, setProduct] = useState({});
+export const useGetProducts = () => {
+    const [products, setProducts] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     
     useEffect(() => {
-        if(id){
             setLoading(true);
             axios
-            .get(`/api/product/${id}`)
-            .then((product) => {
-                setProduct(product.data);
+            .get(`/api/products`)
+            .then((products) => {
+                setProducts(products.data.data);
                 setLoading(false);
             })
-            .catch((error) => {
+            .catch(() => {
                 setError(true);
                 setLoading(false);
             });
-        }
-    }, [id]);
+    }, []);
     
-    return { product, loading, error };
+    return { products, loading, error };
 }

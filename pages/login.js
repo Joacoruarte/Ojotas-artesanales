@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../Components/Layout'
 import s from '../styles/login.module.css'
 import { useForm } from 'react-hook-form'
@@ -8,17 +8,27 @@ import { loginSchema } from '../utils/yups'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import toast, { Toaster } from 'react-hot-toast'
+import AuthContext from '../Context/AuthProvider/AuthContext'
 
 export default function Login() {
   const router = useRouter()
+  const { user , setUser } = useContext(AuthContext)
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(loginSchema)
   })
+
+  useEffect(() => {
+    if(user?.token) {
+      router.push('/')
+    }
+  }, [user])
+
   const onSubmit = async (data) => {
     try {
       const res = await axios.post('/api/login' , { email: data.email, password: data.password })
       if(res.data.token){
-        localStorage.setItem("token" , res.data.token)
+        setUser(res.data)
+        localStorage.setItem("user", JSON.stringify(res.data))
         router.push("/")
       }
     } catch (error) {
