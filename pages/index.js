@@ -6,7 +6,7 @@ import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
 import { useGetProducts } from "../hooks/useGetProducts";
 import styles from "../styles/Home.module.css";
- 
+  
 export default function Home() {
   const { products , loading , error } = useGetProducts();
 
