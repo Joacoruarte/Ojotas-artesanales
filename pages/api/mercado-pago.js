@@ -16,7 +16,7 @@ export default async function mercadoPago(req , res){
         auto_return: "approved",
         statement_descriptor: "OJOTAS ARTESANALES",
         shipments: {
-          cost: 1000,
+          cost: 1,
           mode: "not_specified",
     },
   }
