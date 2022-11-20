@@ -9,9 +9,9 @@ export default async function mercadoPago(req , res){
     let preference = {
         items: [],
         back_urls: {
-          success: "https://localhost:3000/success-payment",
-          failure: "https://localhost:3000",
-          pending: "https://localhost:3000",
+          success: "https://www.ojotasartesanal.com/success-payment",
+          failure: "https://www.ojotasartesanal.com/",
+          pending: "https://www.ojotasartesanal.com/",
         },
         auto_return: "approved",
         statement_descriptor: "OJOTAS ARTESANALES",
