@@ -45,7 +45,7 @@ export default function CartModal({ open, setOpenCart }) {
           EL CARRITO DE COMPRAS ESTA VACIO
         </p>
       ) : ( 
-        <div className="flex flex-col w-full bg-orange-700">
+        <div className="flex flex-col w-full">
           {cart.map((product , i) => (
             <div className="flex gap-2 border-b py-2" key={i}>
               <div className="">
