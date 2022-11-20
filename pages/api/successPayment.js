@@ -12,7 +12,7 @@ export default async function succesPayment(req , res) {
         {
           headers: {
             Authorization:
-              `Bearer ${process.env.ACCESS_TOKEN_SECRET_TEST}`,
+              `Bearer ${process.env.ACCESS_TOKEN_SECRET_PROD}`,
           },
         }
       );

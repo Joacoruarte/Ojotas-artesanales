@@ -1,7 +1,7 @@
 import mercadopago from "mercadopago";
 
 mercadopago.configure({
-    access_token: process.env.ACCESS_TOKEN_SECRET_TEST,
+    access_token: process.env.ACCESS_TOKEN_SECRET_PROD,
 });
 
 export default async function mercadoPago(req , res){
@@ -9,9 +9,9 @@ export default async function mercadoPago(req , res){
     let preference = {
         items: [],
         back_urls: {
-          success: "https://test.ojotasartesanal.com/success-payment",
-          failure: "https://test.ojotasartesanal.com/",
-          pending: "https://test.ojotasartesanal.com/",
+          success: "https://ojotasartesanal.com/success-payment",
+          failure: "https://ojotasartesanal.com/",
+          pending: "https://ojotasartesanal.com/",
         },
         auto_return: "approved",
         statement_descriptor: "OJOTAS ARTESANALES",
