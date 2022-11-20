@@ -12,7 +12,7 @@ export default function CartModal({ open, setOpenCart }) {
 
   const handleBuyProducts = async () => {
     try {
-      const res = await axios.post("/mercado-pago" , { cart })
+      const res = await axios.post("/api/mercado-pago" , { cart })
       window.location.replace(res.data)
     } catch (error) {
       console.log(error)

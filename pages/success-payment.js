@@ -16,7 +16,7 @@ export default function SuccessPayment() {
   useEffect(()=> {
     if(payment_id){
         setLoading(true)
-        axios.get(`/successPayment?payment_id=${payment_id}`)
+        axios.get(`/api/successPayment?payment_id=${payment_id}`)
         .then(res => {
             if(res.data) {
                 localStorage.removeItem("cart")

@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import UserProfile from "../Icons/UserProfile"
-import {AiOutlineShoppingCart} from 'react-icons/ai'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 import Link from 'next/link'
 import CartContext from '../Context/CartContext/CartContext'
 import CartModal from '../Modals/Cart/CartModal'
@@ -24,9 +23,18 @@ export default function Navbar({home}) {
   const [openCart, setOpenCart] = useState(false)
   const { user , setUser } = useContext(AuthContext)
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setScroll(window.scrollY > 0);
-    });
+    const handleScroll = () => { 
+      if(window.scrollY > 0){ 
+        setScroll(true)
+      } else { 
+        setScroll(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
   
   const hasToken = (item) => {
@@ -43,10 +51,10 @@ export default function Navbar({home}) {
   return (
     <div className=''>
         {/* PRINCIPIO DE LA NAVBAR */}
-        <nav className={`${home ? "" : "shadow-sm border-b border-black border-opacity-25"} ${scroll && "shadow-md border-b border-black border-opacity-25"}  border-b border-[#4444] w-[100%] right-0 left-0 my-0 mx-auto fixed z-10 bg-[#E3C8AA]`}>
+        <nav className={`shadow-sm border-b border-black border-opacity-25 ${scroll && "shadow-md border-b border-black border-opacity-25"}  border-b border-[#4444] w-full right-0 left-0 my-0 mx-auto fixed z-10 bg-primary`}>
+              {/*  */}
               <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between lg:border-opacity-25">
-
                   {/* LINKS TO NAVIGATE PAGE */}
                   <div className="flex items-center lg:px-0 px-2 ">
                     {/* OCULTAMOS ACA LOS LINKS */}

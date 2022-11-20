@@ -45,7 +45,7 @@ export default function CreateProducts() {
             console.log(err)
           })
     }else{
-        axios.post("/create-product",{
+        axios.post("/api/create-product",{
            ...product,
            img,
            talles,

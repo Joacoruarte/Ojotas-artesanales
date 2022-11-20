@@ -24,7 +24,7 @@ export default function ProductDetail() {
     if(stock === 0) return
     try {
       setCartLoading(true)
-      const res = await axios.post("/stock", {id})
+      const res = await axios.post("/api/stock", {id})
       setCartLoading(false)
       if(stock > Number(res.data.stock)){
         setStockError(true)
