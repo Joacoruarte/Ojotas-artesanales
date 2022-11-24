@@ -4,3 +4,23 @@
 @tailwind utilities;
 
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@layer components{
+    .dashboardNavbar{
+        @apply  fixed top-0 left-0 flex lg:flex-col flex-row lg:justify-center lg:items-center lg:min-h-screen lg:w-[12.5rem] w-screen h-44 z-50 bg-[#051e34] bg-[url('../public/dashboardbg.png')];
+    }
+    .item_navbar{
+        @apply cursor-pointer px-7 w-full flex items-center rounded-md
+    }
+    .item_navbar_div{
+        @apply flex flex-col items-center h-20 justify-center rounded-md hover:bg-[#273e52] w-full font-montserrat text-white transition-colors duration-300
+    }
+    .titleTab{
+        @apply bg-[#e7e6e6d8] w-full h-20 flex items-center pl-4 shadow-xl text-2xl font-montserrat font-semibold
+    }
+}

@@ -2,6 +2,7 @@ import { Fragment, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import UserProfile from '../Icons/UserProfile'
 import AuthContext from '../Context/AuthProvider/AuthContext'
+import Link from 'next/link'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -31,6 +32,11 @@ export default function DropDown() {
             <p className="text-sm">Ingresó como</p>
             <p className="truncate text-sm font-medium text-gray-900">{user.email}</p>
           </div>
+          {user?.role === "ADMIN" && (
+            <div className='divide-y py-2 px-4'>
+              <p className='text-sm font-medium'>Panel <Link href='/dashboard'><a><strong className='underline-offset-4 hover:underline cursor-pointer'>Admin</strong></a></Link></p>
+            </div>
+          )}
           <div className="py-1">
               <Menu.Item>
                 {({ active }) => (

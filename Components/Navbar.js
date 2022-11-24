@@ -19,7 +19,6 @@ export default function Navbar({home}) {
   const [scroll, setScroll] = useState(false);
   const cart = useContext(CartContext)
   const [open, setOpen] = useState(false)
-  const [dropDown, setDropDown] = useState(false)
   const [openCart, setOpenCart] = useState(false)
   const { user , setUser } = useContext(AuthContext)
   useEffect(() => {

@@ -20,7 +20,8 @@ export default function Register() {
         name: data.name,
         email: data.email,
         password: data.password,
-        phone: data.phone
+        phone: data.phone,
+        role: "USER"
     })
 
     if(user.data.success) {
@@ -46,7 +47,7 @@ export default function Register() {
                 </div>
                 <div>
                     <h3 className={s.titleForInput}>Email</h3>
-                    <input {...register("email")}  className={s.inputForm} type="text" placeholder='ej: tunombre@gmail.com' />
+                    <input {...register("email")}  className={s.inputForm} type="email" placeholder='ej: tunombre@gmail.com' />
                     <p className={s.error}>{errors.email?.message}</p>
                 </div>
 
@@ -57,13 +58,13 @@ export default function Register() {
 
                 <div>
                     <h3 className={s.titleForInput}>Contraseña</h3>
-                    <input {...register("password")}  className={s.inputForm} type="text"  />
+                    <input {...register("password")}  className={s.inputForm} type="password"  />
                     <p className={s.error}>{errors.password?.message}</p>
                 </div>
 
                 <div>
                     <h3 className={s.titleForInput}>Confirmar Contraseña</h3>
-                    <input {...register("confirmPassword")}  className={s.inputForm} type="text"  />
+                    <input {...register("confirmPassword")}  className={s.inputForm} type="password"  />
                     <p className={s.error}>{errors.confirmPassword?.message}</p>
                 </div>
                 

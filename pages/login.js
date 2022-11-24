@@ -45,11 +45,11 @@ export default function Login() {
             <form className={s.formLogin} onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <h3 className={s.titleForInput}>Email</h3>
-                    <input {...register("email")} className={s.inputForm} type="text" placeholder='ej: tunombre@gmail.com' />
+                    <input {...register("email")} className={s.inputForm} type="email" placeholder='ej: tunombre@gmail.com' />
                 </div>                
                 <div>
                     <h3 className={s.titleForInput}>Contraseña</h3>
-                    <input {...register("password")} className={s.inputForm} type="text" />
+                    <input {...register("password")} className={s.inputForm} type="password" />
                 </div>
                 <button className='w-full hover:bg-[#444] bg-black text-white font-montserrat uppercase transition-all duration-300 cursor-pointer flex items-center justify-center py-2' type='submit'>Iniciar sesión</button>
                 <p className='text-center text-sm font-montserrat'>¿No tenes cuenta? <Link href='/register' ><a className='text-black font-bold'>Crear una cuenta</a></Link></p>

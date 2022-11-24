@@ -17,6 +17,11 @@ const userSchema = new Schema({
     phone: {
         type: String,
     },
+    role: {
+        type: String,
+        enum: ["USER", "ADMIN"],
+        default: "USER"
+    }
 }, {
     timestamps: true,
     versionKey: false

@@ -3,7 +3,7 @@ import { BsInstagram } from "react-icons/bs";
 
 export default function Footer() {
   return (
-    <footer className='flex justify-center items-center bg-gray-100 min-h-[10rem] w-full mt-10'>
+    <footer className='absolute bottom-0 flex justify-center items-center bg-gray-100 min-h-[10rem] w-full'>
         <div className='flex justify-around sm:flex-row flex-col sm:gap-0 gap-4 w-full items-center'>
             <div>
                 <h2 className='text-2xl font-bold'>Redes sociales</h2>

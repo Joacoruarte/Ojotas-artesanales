@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <CartProvider>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </CartProvider>
     </AuthProvider>
   )

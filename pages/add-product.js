@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from "../Components/Layout"
-import { useUploadImage, validateFormForProduct } from '../utils/utils'
+import { useUploadImage, validateFormForProduct } from '../hooks/useUploadImage'
 import PlusIcon from '../Icons/PlusIcon'
 import CheckIcon from '../Icons/CheckIcon'
 import Trash from '../Icons/Trash'

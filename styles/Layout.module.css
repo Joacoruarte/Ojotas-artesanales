@@ -1,7 +1,12 @@
 .containerLayout{
     display: grid;
-    grid-template-rows: max-content minmax(100vh, 1fr) 10rem;
-    min-height: 100%;
+    position: relative;
+    grid-template-rows: 4rem 1fr 10rem;
+    min-height: 100vh;
+    max-height: max-content;
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
 
 .DivContainerHamburguerMenu{

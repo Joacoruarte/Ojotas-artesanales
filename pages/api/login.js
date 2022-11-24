@@ -12,15 +12,27 @@ export default async function login(req, res) {
         case "POST":
         try {
             const user = await User.findOne({ email: req.body.email });
-            if (!user) {
-            return res.status(400).json({ success: false });
+            if (!user) return res.status(400).json({ success: false });
+            
+            if(user.role === "ADMIN"){
+                if(req.body.password === process.env.ADMIN_PASSWORD){
+                    let isMatch = await bcrypt.compare(req.body.password, user.password)
+                    if (!isMatch) return res.status(400).json({ success: false });
+                    const token = jwt.sign({ id: user._id , email: user.email}, process.env.JWT_SECRET);
+                    return res.status(200).json({
+                        success: true,
+                        token,
+                        id: user._id,
+                        email: user.email,
+                        role: user.role,
+                    });
+                }
+            }else{
+                const isEqual = await bcrypt.compare(req.body.password, user.password);
+                if (!isEqual) return res.status(400).json({ success: false });
+                const token = jwt.sign({ id: user._id , email: user.email }, process.env.JWT_SECRET)
+                res.status(200).json({ success: true, token , id: user._id , email: user.email , role: user.role});
             }
-            const isMatch = await bcrypt.compare(req.body.password, user.password);
-            if (!isMatch) {
-            return res.status(400).json({ success: false });
-            }
-            const token = jwt.sign({ id: user._id , email: user.email }, process.env.JWT_SECRET)
-            res.status(200).json({ success: true, token , id: user._id , email: user.email });
         } catch (error) {
             res.status(400).json({ success: false });
         }
