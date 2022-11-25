@@ -41,7 +41,7 @@ export default function SuccessPayment() {
                 <h1 className='font-montserrat text-[1.5rem]'>¡Felcidades su compra se acredito con exito!</h1>
 
                 <div className=''>
-                    <p className='font-montserrat text-left'>Estamos gestionando el envio para lo que recivas lo antes posible</p>
+                    <p className='font-montserrat text-left'>Estamos gestionando el envio para lo que recibas lo antes posible</p>
                     <p className='font-montserrat text-left'>Resumen de la compra:</p>
                 </div>
                 <div className='w-full px-4'>
