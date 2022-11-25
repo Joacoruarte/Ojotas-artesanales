@@ -6,8 +6,7 @@
     min-height: 88vh;
     max-height: max-content;
     border-radius: 30px;
-    margin-top: 5rem;
-    margin: 5rem auto 0 auto;
+    margin: 3rem auto 0 auto;
     place-content: center;
     background-color: #F0F0F0;
 }
@@ -108,6 +107,12 @@
 
     .containerViewProduct{
         min-height: 60vh;
+    }
+    .noHasImage_title{
+        height: 25rem;
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
     }
 }
 

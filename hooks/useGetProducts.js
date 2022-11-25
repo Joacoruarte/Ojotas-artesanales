@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export const useGetProducts = () => {
-    const [products, setProducts] = useState({});
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     
@@ -19,6 +19,20 @@ export const useGetProducts = () => {
                 setLoading(false);
             });
     }, []);
+
+    const refetch = () => {
+        setLoading(true);
+        axios
+        .get(`/api/products`)
+        .then((products) => {
+            setProducts(products.data.data);
+            setLoading(false);
+        })
+        .catch(() => {
+            setError(true);
+            setLoading(false);
+        });
+    }
     
-    return { products, loading, error };
+    return { products, loading, error , refetch};
 }

@@ -23,4 +23,43 @@
     .titleTab{
         @apply bg-[#e7e6e6d8] w-full h-20 flex items-center pl-4 shadow-xl text-2xl font-montserrat font-semibold
     }
+    .containerScroll{
+        @apply !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-[#051e34];
+    }
+    
+    .buttonSubmit{
+        @apply bg-black py-4 capitalize px-1 hover:bg-slate-600 transition-all duration-300 text-white font-montserrat
+    }
+
+    .inputForm{
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        border: 1px solid #ccc;
+    }
+    
+    .inputForm:focus{
+        box-shadow: none !important;
+        outline: none !important;
+        border-color: #444;
+    }
+    .titleForInput{
+        font-family: 'Montserrat';
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .inputFormNumeros{
+        text-align: center;
+        padding: 1rem;
+        width: 7rem;
+        border: 1px solid #ccc;
+    }
+    
+    .inputFormNumeros:focus{
+        box-shadow: none !important;
+        outline: none !important;
+        border-color: #444;
+    }
+    
 }

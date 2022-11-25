@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from "../Components/Layout"
-import { useUploadImage, validateFormForProduct } from '../hooks/useUploadImage'
+import { useUploadImage } from '../hooks/useUploadImage'
 import PlusIcon from '../Icons/PlusIcon'
 import CheckIcon from '../Icons/CheckIcon'
 import Trash from '../Icons/Trash'
@@ -9,12 +9,9 @@ import s from "../styles/add-product.module.css"
 import XIcon from '../Icons/XIcon'
 import ButtonForm from '../Components/ButtonForm'
 import Image from 'next/image'
+import { handleClickButton, TAB_SELECT, validateFormForProduct } from '../utils/utils'
 
-export const TAB_SELECT ={
-  MANUAL: "Agruegar Manual",
-  SIN_STOCK: "Marcar sin Stock",
-  POR_ENCARGUE: "Por encargue",
-}
+
 
 export default function CreateProducts() {
   const { img , progress , setImg ,  uploadImage }  = useUploadImage()
@@ -59,20 +56,7 @@ export default function CreateProducts() {
     }
   }
 
-  const handleClickButton = (tab) =>{
-    if(tab === TAB_SELECT.MANUAL){
-      setSelect(select !== TAB_SELECT.MANUAL ? TAB_SELECT.MANUAL: "")
-    }
-    if(tab === TAB_SELECT.SIN_STOCK){
-      setSelect(select !== TAB_SELECT.SIN_STOCK ? TAB_SELECT.SIN_STOCK: "")
-    }
-    if(tab === TAB_SELECT.POR_ENCARGUE){
-      setSelect(select !== TAB_SELECT.POR_ENCARGUE ? TAB_SELECT.POR_ENCARGUE: "")
-    }
-  } 
-
   return (
-    <Layout>
       <div className={s.containerForm}>
         {/* PREVIEW IMAGE */}
         <div className={s.containerViewProduct}>
@@ -153,15 +137,15 @@ export default function CreateProducts() {
                 {/* INPUT PARA CARGAR STOCK */}
                 <h3 className={s.titleForInput}>Stock</h3>
                 <div className='flex gap-5'>
-                  <ButtonForm title={TAB_SELECT.MANUAL} select={select} onClick={()=> handleClickButton(TAB_SELECT.MANUAL)}/>
+                  <ButtonForm title={TAB_SELECT.MANUAL} select={select} onClick={()=> handleClickButton(TAB_SELECT.MANUAL , select , setSelect)}/>
                   {select === TAB_SELECT.MANUAL ? (
                     <input className={`${s.inputFormNumeros}`} type="number" value={stock} onChange={({target: {value}}) => {
                       setStock(value < 0 ? 0 : value)
                     }}/>
                   ) : (
                     <>
-                      <ButtonForm title={TAB_SELECT.SIN_STOCK} select={select} onClick={()=> handleClickButton(TAB_SELECT.SIN_STOCK)}/>
-                      <ButtonForm title={TAB_SELECT.POR_ENCARGUE} select={select} onClick={()=> handleClickButton(TAB_SELECT.POR_ENCARGUE)}/>
+                      <ButtonForm title={TAB_SELECT.SIN_STOCK} select={select} onClick={()=> handleClickButton(TAB_SELECT.SIN_STOCK, select , setSelect)}/>
+                      <ButtonForm title={TAB_SELECT.POR_ENCARGUE} select={select} onClick={()=> handleClickButton(TAB_SELECT.POR_ENCARGUE , select , setSelect)}/>
                     </>
                   )}
                 </div>
@@ -171,6 +155,5 @@ export default function CreateProducts() {
             </form>
         </div>
       </div>
-    </Layout>
   )
 }

@@ -1,7 +1,4 @@
 import React from 'react'
-import { GiFlipFlops } from "react-icons/gi"
-import { BiBox } from "react-icons/bi"
-import { FiEdit } from "react-icons/fi"
 
 export default function NavbarDashboardItem({ icon, text, active, handleTab }) {
   return (
