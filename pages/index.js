@@ -46,12 +46,12 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps() {
-  const res = await axios.get("https://ojotasartesanal.com/products")
+  const res = await axios.get("https://ojotasartesanal.com/api/products")
   const products = await res.data.data;
-
+  console.log(products)
   return {
     props: {
-      products,
+      products: [],
     }
   }
 }
