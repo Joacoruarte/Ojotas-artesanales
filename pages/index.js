@@ -46,8 +46,17 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps() {
-  const res = await axios.get("/products")
-  const products = await res.data.data;
+  // const res = await axios.get("https://ojotasartesanal.com/products")
+  const products = [
+    {
+      _id: "1",
+      alt: "ojota",
+      img: "https://i.ibb.co/0nQqZ1p/ojota-1.jpg",
+      color: "black",
+      name: "ojota",
+      price: 100,
+    }
+  ]
 
   return {
     props: {
