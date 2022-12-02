@@ -1,9 +1,10 @@
 import Product from "../../models/Product"
-import { dbConnect } from "../../utils/db"
+import dbConnect from "../../utils/db"
 
-dbConnect()
+
 
 export default async function getProducts(req, res) {
+    await dbConnect()
     switch (req.method) {
         case "POST":
             const product = await Product.create(req.body)

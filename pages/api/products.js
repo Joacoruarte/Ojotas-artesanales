@@ -1,8 +1,6 @@
 import dbConnect from "../../utils/db"
 import Product from "../../models/Product.js"
 
-
-
 export default async function getProducts(req, res) {
     await dbConnect()
 

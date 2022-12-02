@@ -3,9 +3,8 @@ import Payment from "../../models/Payment.js";
 import Product from "../../models/Product.js";
 import { dbConnect } from "../../utils/db.js";
 
-dbConnect()
-
 export default async function succesPayment(req , res) {
+    await dbConnect();
     const { payment_id } = req.query
     const infoApi = await axios.get(
         "https://api.mercadopago.com/v1/payments/" + payment_id,

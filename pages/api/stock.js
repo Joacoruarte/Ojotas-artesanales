@@ -1,9 +1,8 @@
 import Product from "../../models/Product";
-import { dbConnect } from "../../utils/db";
-
-dbConnect()
+import dbConnect from "../../utils/db";
 
 export default async function stock(req, res) {
+    await dbConnect()
     const { id } = req.body;
     const product = await Product.findById(id);
     if(product && product.stock > 0){
