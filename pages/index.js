@@ -14,6 +14,8 @@ export default function Home({ products }) {
   //   return <div>Something went wrong</div>
   // }
 
+  console.log(products);
+
   return (
     <div>
       <Head>
@@ -51,7 +53,7 @@ export async function getServerSideProps() {
   console.log(products)
   return {
     props: {
-      products: [],
+      products,
     }
   }
 }
