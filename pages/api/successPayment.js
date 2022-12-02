@@ -1,7 +1,7 @@
 import axios from "axios";
 import Payment from "../../models/Payment.js";
 import Product from "../../models/Product.js";
-import { dbConnect } from "../../utils/db.js";
+import dbConnect from "../../utils/db.js";
 
 export default async function succesPayment(req , res) {
     await dbConnect();
