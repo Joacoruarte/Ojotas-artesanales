@@ -12,10 +12,10 @@
 
 @layer components{
     .dashboardNavbar{
-        @apply  fixed top-0 left-0 flex lg:flex-col flex-row lg:justify-center lg:items-center lg:min-h-screen lg:w-[12.5rem] w-screen h-44 z-50 bg-[#051e34] bg-[url('../public/dashboardbg.png')];
+        @apply  fixed top-0 left-0 flex lg:flex-col flex-row lg:justify-center lg:items-center lg:min-h-screen lg:w-[12.5rem] w-full h-44 z-50 bg-[#051e34] bg-[url('../public/dashboardbg.png')];
     }
     .item_navbar{
-        @apply cursor-pointer px-7 w-full flex items-center rounded-md
+        @apply cursor-pointer px-7 w-full flex items-center rounded-md;
     }
     .item_navbar_div{
         @apply flex flex-col items-center h-20 justify-center rounded-md hover:bg-[#273e52] w-full font-montserrat text-white transition-colors duration-300
@@ -29,6 +29,10 @@
     
     .buttonSubmit{
         @apply bg-black py-4 capitalize px-1 hover:bg-slate-600 transition-all duration-300 text-white font-montserrat
+    }
+
+    .navbar_dashboard_icon{
+        @apply w-8 h-8;
     }
 
     .inputForm{
@@ -62,4 +66,14 @@
         border-color: #444;
     }
     
+
+
+    @media (max-width: 500px){
+        .navbar_dashboard_icon{
+            @apply w-6 h-6
+        }
+        .item_navbar{
+            @apply px-0
+        }
+    }
 }

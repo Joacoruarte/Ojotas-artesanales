@@ -7,12 +7,12 @@ import Loading from "../Components/Loading";
 import { useGetProducts } from "../hooks/useGetProducts";
 import styles from "../styles/Home.module.css";
    
-export default function Home() {
-  const { products , loading , error } = useGetProducts();
+export default function Home({ products }) {
+  // const { products , loading , error } = useGetProducts();
 
-  if(error){
-    return <div>Something went wrong</div>
-  }
+  // if(error){
+  //   return <div>Something went wrong</div>
+  // }
 
   return (
     <div>
@@ -23,9 +23,9 @@ export default function Home() {
       </Head>
 
       <Layout home={true}>
-        {loading ? ( 
+        {/* {loading ? ( 
             <Loading/>
-        ) : ( 
+        ) : (  */}
           <div className={`${styles.containerCards} gap-4 mx-auto px-9 mt-10`}>
             {products && Array.isArray(products) && products?.map((product, i) => (
                 <Card
@@ -39,8 +39,19 @@ export default function Home() {
                 />
             ))}
           </div>
-        )}
+        {/* )} */}
       </Layout>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await axios.get("/api/products")
+  const products = await res.data.data;
+
+  return {
+    props: {
+      products,
+    }
+  }
 }

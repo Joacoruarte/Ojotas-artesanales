@@ -5,7 +5,7 @@ export default function NavbarDashboardItem({ icon, text, active, handleTab }) {
     <li className='item_navbar'>
         <div onClick={handleTab} className={`item_navbar_div ${active && "bg-[#273e52]"}`}>
             {icon()}
-            <p className='text-center whitespace-nowrap'>{text}</p>
+            <p className='text-center sm:text-base text-xs whitespace-nowrap'>{text}</p>
         </div>
     </li>
   )

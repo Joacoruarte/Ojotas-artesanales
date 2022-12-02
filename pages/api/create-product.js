@@ -4,7 +4,6 @@ import { dbConnect } from "../../utils/db"
 dbConnect()
 
 export default async function getProducts(req, res) {
-
     switch (req.method) {
         case "POST":
             const product = await Product.create(req.body)
@@ -16,6 +15,11 @@ export default async function getProducts(req, res) {
             const productUpdate = await Product.findByIdAndUpdate(_id, req.body)
             productUpdate.save()
             res.status(201).json({success: "Se actualizo el producto correctamente"})
+            break;
+        case "DELETE":
+            const productDelete = await Product.findByIdAndDelete(req.body._id)
+            productDelete.save()
+            res.status(201).json({success: "Se elimino el producto correctamente"})
             break;
         default:
             res.status(400).json({ success: false });
