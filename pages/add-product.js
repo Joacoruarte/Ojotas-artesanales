@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import Layout from "../Components/Layout"
-import { useUploadImage } from '../hooks/useUploadImage'
 import PlusIcon from '../Icons/PlusIcon'
 import CheckIcon from '../Icons/CheckIcon'
 import Trash from '../Icons/Trash'
-import axios from "axios"
+import axios from "../utils/configAxios";
 import s from "../styles/add-product.module.css"
 import XIcon from '../Icons/XIcon'
 import ButtonForm from '../Components/ButtonForm'
 import Image from 'next/image'
 import { handleClickButton, TAB_SELECT, validateFormForProduct } from '../utils/utils'
+import { useUploadImage } from '../hooks/useUploadImage'
 
 
 

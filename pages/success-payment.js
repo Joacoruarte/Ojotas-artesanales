@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "../utils/configAxios";
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect } from 'react'
 import Layout from '../Components/Layout'

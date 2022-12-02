@@ -1,41 +1,11 @@
-import User from "../../models/User";
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
-import { dbConnect } from "../../utils/db";
+import Users from "../../repositories/user.repository";
 
-dbConnect()
 
 export default async function login(req, res) {
-    const { method } = req;
-    
-    switch (method) {
+    const user = new Users()    
+    switch (req.method) {
         case "POST":
-        try {
-            const user = await User.findOne({ email: req.body.email });
-            if (!user) return res.status(400).json({ success: false });
-            
-            if(user.role === "ADMIN"){
-                if(req.body.password === process.env.ADMIN_PASSWORD){
-                    let isMatch = await bcrypt.compare(req.body.password, user.password)
-                    if (!isMatch) return res.status(400).json({ success: false });
-                    const token = jwt.sign({ id: user._id , email: user.email}, process.env.JWT_SECRET);
-                    return res.status(200).json({
-                        success: true,
-                        token,
-                        id: user._id,
-                        email: user.email,
-                        role: user.role,
-                    });
-                }
-            }else{
-                const isEqual = await bcrypt.compare(req.body.password, user.password);
-                if (!isEqual) return res.status(400).json({ success: false });
-                const token = jwt.sign({ id: user._id , email: user.email }, process.env.JWT_SECRET)
-                res.status(200).json({ success: true, token , id: user._id , email: user.email , role: user.role});
-            }
-        } catch (error) {
-            res.status(400).json({ success: false });
-        }
+            user.loginUser(req , res)
         break;
         default:
         res.status(400).json({ success: false });

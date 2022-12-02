@@ -1,30 +1,15 @@
-import User from "../../models/User";
-import bcrypt from "bcrypt"
-import { dbConnect } from "../../utils/db";
 
-dbConnect()
+import Users from "../../repositories/user.repository";
+
 
 export default async function users(req , res){
-    const { method } = req;
-    switch(method){
+    const users = new Users()
+    switch(req.method){
         case "GET":
-            try {
-                const users = await User.find({});
-                res.status(200).json({ success: true, data: users });
-            } catch (error) {
-                res.status(400).json({ success: false });
-            }
+            users.getUsers(res)
             break;
         case "POST":
-            try {
-                const salt = await bcrypt.genSalt(10);
-                const hashedPassword = await bcrypt.hash(req.body.password, salt);
-                const user = await User.create({...req.body , password: hashedPassword});
-                user.save()
-                res.status(201).json({ success: true, data: user });
-            } catch (error) {
-                res.status(400).json({ success: false });
-            }
+            users.createUser(req , res)
             break;
         default:
             res.status(400).json({ success: false });

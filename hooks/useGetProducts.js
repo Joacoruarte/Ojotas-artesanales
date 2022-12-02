@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../utils/configAxios";
 import { useEffect, useState } from "react";
 
 export const useGetProducts = () => {

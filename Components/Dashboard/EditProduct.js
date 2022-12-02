@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "../../utils/configAxios";
 import Image from 'next/image'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'

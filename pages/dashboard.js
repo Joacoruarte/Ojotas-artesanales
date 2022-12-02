@@ -6,7 +6,6 @@ import { TABS } from '../utils/utils'
 import NavbarDashboardItem from '../Components/Dashboard/NavbarDashboardItem'
 import { useRouter } from 'next/router'
 import ProductDashboard from '../Components/Dashboard/ProductDashboard'
-import axios from 'axios'
 import { useGetProducts } from "../hooks/useGetProducts"
 import { Toaster } from 'react-hot-toast'
 import Loading from '../Components/Loading'

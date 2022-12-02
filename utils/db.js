@@ -1,24 +1,32 @@
-import mongoose from "mongoose";
+// /lib/dbConnect.js
+import mongoose from 'mongoose'
 
-const conn = {
-    isConnected: false
+const MONGODB_URI = process.env.MONGODB_URI
+
+if (!MONGODB_URI) {
+  throw new Error('Please define the MONGODB_URI environment variable')
 }
 
-export async function dbConnect () {
+let cached = global.mongoose
 
-    if (conn.isConnected) return;
-
-    const db = mongoose.connect(process.env.MONGODB_URI).then(res=> res)
-    if(db){
-        conn.isConnected = (await db).connections[0].readyState
-    }
-
-    console.log((await db).connection.db.databaseName)
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null }
 }
 
-mongoose.connection?.on("connected", () => {
-    console.log("Mongodb is connected");
-})
-mongoose.connection?.on("error", (err) => {
-    console.log(err);
-})
+async function dbConnect () {
+  if (cached.conn) {
+    return cached.conn
+  }
+
+  if (!cached.promise) {
+    const opts = {}
+
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then(mongoose => {
+      return mongoose
+    })
+  }
+  cached.conn = await cached.promise
+  return cached.conn
+}
+
+export default dbConnect

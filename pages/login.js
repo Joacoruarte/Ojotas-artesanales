@@ -5,10 +5,10 @@ import s from '../styles/login.module.css'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { loginSchema } from '../utils/yups'
-import axios from 'axios'
 import { useRouter } from 'next/router'
 import toast, { Toaster } from 'react-hot-toast'
 import AuthContext from '../Context/AuthProvider/AuthContext'
+import axios from "../utils/configAxios";
 
 export default function Login() {
   const router = useRouter()

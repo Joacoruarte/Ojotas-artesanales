@@ -3,7 +3,7 @@ import React from "react";
 import { FiEdit } from "react-icons/fi";
 import { TABS, transformToDinero } from "../../utils/utils";
 import Trash from "../../Icons/Trash";
-import axios from "axios";
+import axios from "../../utils/configAxios";
 import toast from "react-hot-toast";
 export default function ProductDashboard({ product , setEditedProduct , setTab , refetch}) {
   const handleSetEditProduct = () => {

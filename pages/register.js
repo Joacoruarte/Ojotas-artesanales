@@ -5,9 +5,9 @@ import s from "../styles/register.module.css"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { registerSchema } from '../utils/yups'
-import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import axios from "../utils/configAxios";
 
 export default function Register() {
   const router = useRouter()
