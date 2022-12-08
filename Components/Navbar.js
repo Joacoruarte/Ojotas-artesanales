@@ -7,6 +7,7 @@ import CartModal from '../Modals/Cart/CartModal'
 import s from "../styles/Layout.module.css"
 import DropDown from './DropDown'
 import AuthContext from '../Context/AuthProvider/AuthContext'
+import SideBarModal from '../Modals/Sidebar/SideBarModal'
 
 const navigation = [
     { name: 'INICIO', href: '/', current: true },
@@ -135,6 +136,16 @@ export default function Navbar({home}) {
               </div>
         </nav>
 
+
+
+        {/* SIDE BAR */}
+        <div>
+          <div onClick={()=> setOpen(false)} className={`${!open && "opacity-0 -z-10 hidden" } opacity-1 inset-0 transition-all duration-300 w-full h-full bg-slate-600 bg-opacity-50 z-[300] fixed`}>
+          </div>
+          <div className={`${open === true ? s.show : s.hide} sm:w-[25rem] w-[23rem] fixed left-0 bg-white px-4 py-2 h-screen shadow-xl`} style={{zIndex: 10000}}>
+            <SideBarModal setOpen={setOpen}/>
+          </div>
+        </div>
 
         {/* CART */}
         <div>

@@ -35,11 +35,11 @@ export default function Register() {
         <Toaster 
             position='top-right'
         />
-        <div className='w-full mt-10 grid place-content-center h-full'>
-            <div className={"my-4 pb-2 border-b-black border border-l-transparent border-r-transparent border-t-transparent"}>
-                <h1 className='uppercase font-montserrat font-bold w-full text-lg flex justify-center '>OJOTAS ARTESANALES</h1>
-            </div>
-            <form className={s.formLogin} onSubmit={handleSubmit(onSubmit)}>
+        <div className='w-full mt-2 grid place-content-center h-full'>
+            <form className={s.formRegister} onSubmit={handleSubmit(onSubmit)}>
+                <div className={"my-4 pb-2 border-b-black border border-l-transparent border-r-transparent border-t-transparent"}>
+                    <h1 className='uppercase font-montserrat font-bold w-full text-lg flex justify-center '>OJOTAS ARTESANALES</h1>
+                </div>
                 <div>
                     <h3 className={s.titleForInput}>Nombre</h3>
                     <input {...register("name")}  className={s.inputForm} type="text" placeholder='ej: María Perez' />

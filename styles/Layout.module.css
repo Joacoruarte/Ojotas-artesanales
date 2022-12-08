@@ -62,19 +62,37 @@
 }
 
 
+
+
 .showCart{
     display: block;
-    animation: appear .35s;
+    animation: appearRight .35s;
+}
+.show{
+    display: block;
+    animation: appearLeft .35s;
 }
 
 
 .hideCart{
     display: none;
 }
+.hide{
+    display: none;
+}
 
-@keyframes appear{
+@keyframes appearRight{
     0%{
         transform: translate(300px);
+    }
+
+    100%{
+        transform: translateX(0px);
+    }
+}
+@keyframes appearLeft{
+    0%{
+        transform: translate(-300px);
     }
 
     100%{

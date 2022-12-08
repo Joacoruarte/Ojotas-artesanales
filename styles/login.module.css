@@ -29,3 +29,10 @@
 .inputForm::placeholder{
     color: rgb(168, 166, 166);
 }
+
+@media (max-width: 465px) {
+    .formLogin{
+        min-width: 100%;
+        padding: 1rem 2rem;
+    }
+}
