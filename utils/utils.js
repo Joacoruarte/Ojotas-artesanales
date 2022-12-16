@@ -5,22 +5,20 @@ export function transformToDinero(numero){
   if(numero >= 100000 && numero < 1000000) return `$${numero.toString().slice(0 ,3)}.${numero.toString().slice(3)}`
 }
 
-export function validateFormForProduct({talles,img,select,stock}){
-  if(talles.length === 0){
-    alert("Debes agregar al menos un talle")
-    return true 
-  }
+export function validateFormForProduct({img,stock}){
+  
   if(img === ""){
     alert("Debe subir una imagen")
     return true 
   }
-  if(select === ""){
-    alert("Seleccionar una opcion de stock antes de enviar")
-    return true 
-  }
-  if(stock === 0){
-    alert("El stock no puede ser 0 , marcar sin stock o por encargue")
-    return true 
+  
+  let count = 0
+  let limit = Object.keys(stock).length
+  Object.keys(stock).forEach((item) => stock[item] === 0 ? count++ : null)
+
+  if(count === limit){
+    alert("Debe agregar al menos un stock")
+    return true
   }
 }
 

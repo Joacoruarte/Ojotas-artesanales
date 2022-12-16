@@ -1,9 +1,21 @@
-import dbConnect from "../../utils/db"
-import Product from "../../models/Product.js"
+import Products from "../../repositories/product.repository"
 
 export default async function getProducts(req, res) {
-    await dbConnect()
-
-    const products = await Product.find({})
-    res.status(200).json({ success: true, count: products.length , data: products })
+    const products = new Products()
+    switch (req.method) {
+        case 'GET':
+            products.getAllProducts(res , req)
+            break;
+        case "POST":
+            products.createProduct(res , req)
+            break;
+        case "PUT":
+            products.updateProduct(res , req)
+            break;
+        case "DELETE":
+            products.deleteProduct(res , req)
+            break;
+        default:
+            res.status(400).json({ success: false });
+    }
 }

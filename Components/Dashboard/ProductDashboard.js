@@ -12,7 +12,7 @@ export default function ProductDashboard({ product , setEditedProduct , setTab ,
   }
 
   const deleteProduct = () => {
-    axios.delete("/api/create-product" , { data: { _id: product?._id }})
+    axios.delete("/api/products" , { data: { _id: product?._id }})
     .then(res => {
       toast.success(res.data.success)
       refetch()
@@ -28,7 +28,7 @@ export default function ProductDashboard({ product , setEditedProduct , setTab ,
           className="shadow-lg rounded-md"
           width={90}
           height={90}
-          src={product?.img}
+          src={product?.img[0]}
           alt={product.alt}
           objectFit="cover"
         />
@@ -43,10 +43,10 @@ export default function ProductDashboard({ product , setEditedProduct , setTab ,
         <p>{transformToDinero(product.price)}</p>
       </div>
       <div className="sm:min-w-[6rem] w-full flex justify-center items-center">
-        <p>{product.stock}</p>
+        {/* <p>{product.stock}</p> */}
       </div>
       <div className="sm:min-w-[6rem] w-full flex justify-center items-center">
-        <p>{product.talles.join(" , ")}</p>
+        {/* <p>{product.talles.join(" , ")}</p> */}
       </div>
 
       <div className="flex items-center justify-around sm:min-w-[6rem] w-full">

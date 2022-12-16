@@ -51,7 +51,7 @@ export default function Navbar({home}) {
   return (
     <div className=''>
         {/* PRINCIPIO DE LA NAVBAR */}
-        <nav className={`shadow-sm border-b border-black border-opacity-25 ${scroll && "shadow-md border-b border-black border-opacity-25"}  border-b border-[#4444] w-full right-0 left-0 my-0 mx-auto fixed z-10 bg-primary`}>
+        <nav className={`shadow-sm border-b border-black border-opacity-25 ${scroll && "shadow-md border-b border-black border-opacity-25"}  border-b border-[#4444] w-full right-0 left-0 my-0 mx-auto fixed z-50 bg-primary`}>
               {/*  */}
               <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between lg:border-opacity-25">
@@ -119,7 +119,7 @@ export default function Navbar({home}) {
 
                   {/* TITLE OF E-COMMERCE */}
                   <div className='lg:hidden  flex w-full justify-center'>
-                    <Link href="/"><a className={`${scroll ? "text-base" : "text-lg"} uppercase font-montserrat font-bold underline underline-offset-8 transition-all duration-300`}>Ojotas artesanales</a></Link>
+                    <Link href="/"><a className={`text-lg uppercase font-montserrat font-bold underline underline-offset-8 transition-all duration-300`}>Ojotas artesanales</a></Link>
                   </div>
 
 

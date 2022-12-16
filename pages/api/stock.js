@@ -1,10 +1,9 @@
-import Product from "../../models/Product";
-import dbConnect from "../../utils/db";
+import Products from "../../repositories/product.repository";
 
 export default async function stock(req, res) {
-    await dbConnect()
-    const { id } = req.body;
-    const product = await Product.findById(id);
+    const repository = new Products()
+    const product = await repository.getProductById(req , res)
+    
     if(product && product.stock > 0){
         return res.status(200).json({success: true , stock: product.stock})
     }else{

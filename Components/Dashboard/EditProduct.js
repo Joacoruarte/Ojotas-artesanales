@@ -11,7 +11,7 @@ export default function EditProduct({ editedProduct , setEditedProduct , refetch
     const [select, setSelect] = useState("")
     const handleEditProduct = (e) => {
         e.preventDefault()
-        axios.put("/api/create-product",editedProduct)
+        axios.put("/api/products",editedProduct)
         .then(() => {
             refetch()
             setEditedProduct({})

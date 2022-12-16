@@ -1,7 +1,7 @@
 .ContainerProductDetail{
     width: 70rem;
     padding: 1rem;
-    margin: 4.5rem auto;
+    margin: 1rem auto;
     height: max-content;
 }
 
@@ -12,11 +12,34 @@
 }
 
 .containerImage{
+    display: flex;
+    position: relative;
+    overflow-x: scroll;
     width: 500px;
     height: 500px;
 }
 
-.containerImage > img{
+.carrousel{
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 500px;
+    height: 500px;
+}
+
+.containerImage:hover svg {
+    opacity: 1;
+}
+.containerImage::-webkit-scrollbar{
+    width: 0px;
+}
+
+.containerImage div{
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.containerImage img{
     background-color: #ccc;
     width: 500px;
     height: 500px;
@@ -116,18 +139,45 @@
         flex-direction: column;
     }
     .containerImage{
-        width: 100%;
-    }
-    .containerImage > img{
-        width: 100%;
+        margin: 0 auto;
     }
 }
 
-@media (max-width: 640px){
+@media (max-width: 600px){
     .containerImage{
-        flex: 1;
-        width: 100%;
-        height: 100%;
+        width: 400px;
+        height: 400px;
+    }
+
+    .containerImage div {
+        min-width: 400px;
+        min-height: 500px;
+    }
+}
+@media (max-width: 480px){
+    .containerImage{
+        width: 350px;
+        height: 350px;
+    }
+
+    .containerImage div {
+        width: 350px;
+        height: 350px;
+    }
+}
+@media (max-width: 430px){
+    .containerImage{
+        width: 300px;
+        height: 300px;
+    }
+
+    .containerImage div {
+        min-width: 300px;
+        min-height: 500px;
+    }
+    .containerImage div img{
+        width: 300px;
+        height: 500px;
     }
 }
 

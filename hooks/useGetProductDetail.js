@@ -12,6 +12,7 @@ export const useGetProductDetail = (id) => {
             axios
             .get(`/api/product/${id}`)
             .then((product) => {
+                console.log(product.data)
                 setProduct(product.data);
                 setLoading(false);
             })

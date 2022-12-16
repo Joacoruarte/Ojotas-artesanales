@@ -9,16 +9,17 @@ import { useGetProductDetail } from '../../hooks/useGetProductDetail'
 import s from "../../styles/ProductDetail.module.css"
 import { transformToDinero } from "../../utils/utils.js"
 import toast, { Toaster } from 'react-hot-toast';
+import {ChevronLeftIcon , ChevronRightIcon} from '@heroicons/react/20/solid'
 
 export default function ProductDetail() {
   const cart = useContext(CartContext)
   const [stock , setStock] = React.useState(0)
   const [stockError , setStockError] = React.useState(false)
   const [cartLoading , setCartLoading] = React.useState(false)
+  const rowRef = React.useRef(null)
   const router = useRouter()
   const { id } = router.query
   const { loading , product } = useGetProductDetail(id)
-
 
   const handleChange = async () => {
     if(stock === 0) return
@@ -44,8 +45,20 @@ export default function ProductDetail() {
       setTimeout(()=> setStockError(false) , 3000)
       return 
     }
-    
   }
+
+  const handleClick = (direction) => {
+    if (rowRef.current) {
+      const { scrollLeft, clientWidth } = rowRef.current
+      const scrollTo =
+        direction === 'left'
+          ? scrollLeft - clientWidth
+          : scrollLeft + clientWidth
+
+      rowRef.current.scrollTo({ left: scrollTo, behavior: "smooth" })
+    }
+  }
+
   return (
     <>
     <Head>
@@ -55,7 +68,7 @@ export default function ProductDetail() {
     </Head>
       <Layout home={false}>
           <Toaster 
-            position="top-right"
+            position="top-center"
           />
           <div className={s.ContainerProductDetail}>
             {loading ? (
@@ -69,33 +82,59 @@ export default function ProductDetail() {
                     {/* IMAGE PRODUCT DETAIL */}
                     {product?.img && (
                       <>
-                        <div className="sm:block hidden">
-                          <div className={s.containerImage}>
-                            <Image width={500} height={500} objectFit="cover" layout="responsive" src={product.img} alt={product.alt} />
+                        <div className={s.containerImage}>
+                          <ChevronLeftIcon onClick={()=> handleClick('left')} className='opacity-0 cursor-pointer duration-200 transition-all absolute z-10 w-14 h-14 bottom-[50%]'/>
+                          
+                          <div ref={rowRef} className={s.carrousel}>
+                            {product.img.map((img , index) => (
+                              <div key={index}>
+                                <Image width={400} height={400} layout='responsive' objectFit="cover" src={img} alt={product.alt} />
+                              </div>
+                            ))}
                           </div>
+                          
+                          <ChevronRightIcon onClick={()=> handleClick('right')} className='opacity-0 cursor-pointer duration-200 transition-all absolute z-10 w-14 h-14 bottom-[50%] right-0'/>
                         </div>
-                        <div className="sm:hidden block">
+                        {/* <div className="sm:hidden block">
                           <div className={s.containerImage}>
-                              <Image width={450} height={450} objectFit="cover" layout="intrinsic"   src={product.img} alt={product.alt} />
+                              <Image width={450} height={450} objectFit="cover" layout="intrinsic"   src={product.img[0]} alt={product.alt} />
                           </div>
-                        </div>
+                        </div> */}
                       </>
                     )}
+
+
                     {/* DESCRIPTION PRODUCT DETAIL */}
                     <div className={s.containerRightProduct}>
                       <h2 className='font-montserrat font-normal text-[1.5rem]'>{product?.name}</h2>
                       <p className='font-extrabold text-[2rem] font-montserrat'>{transformToDinero(product?.price)}</p>
                       <span className='font-montserrat uppercase'><b>24</b> cuotas de <b>$726,23</b></span>
+                      
                       <hr className='bg-[#CCC] w-full my-4'/>
-                      <h3 className='font-montserrat uppercase'>Color: <span className='font-bold'>{product?.color}</span></h3>
+                      
+                      <h3 className='font-montserrat uppercase'>Color: <span className='font-bold'>{product?.description}</span></h3>
                       <div className='bg-[#CCC] h-[0.5px] w-full my-4'/>
 
-                      {/* CANTIDAD DE PRODUCTO */}
+                      {/* TALLES */}                      
+                      <h3 className='font-montserrat uppercase'>Talles:</h3>
+                      <div className='flex gap-4 flex-wrap sm:max-w-[20rem]'>
+                        {product.stock && Object.keys(product?.stock)?.sort().map(talle => { 
+                          return (
+                            <div key={talle} className={`flex ${product.stock[talle].quantity === 0 ? "bg-gray-100 pointer-events-none cursor-none" : "cursor-pointer"} border p-1 items-center justify-between my-2`}>
+                              <p className='font-montserrat uppercase'>{talle}</p>
+                            </div>
+                          )
+                        })}
+                      </div>
+                      <div className='bg-[#CCC] h-[0.5px] w-full my-4'/>
 
+                      {/* CANTIDAD DE PRODUCTO A ELEGIR*/}
+                      
                       <div className='my-2 flex flex-col'>
                         <label className='font-montserrat uppercase text-'>Cantidad</label>
-                        <input placeholder='0' type='number' onChange={(e) => setStock(e.target.value)} className="w-[6rem] mt-1 h-8 focus:ring-lime-500 focus:shadow-md transition-all duration-300"/>
+                        <input placeholder='0' value={stock} type='number' onChange={({target:{value}}) => value >= 0 && setStock(value)} className="w-[6rem] mt-1 h-8 border py-4 px-2 border-[#ccc] outline-none transition-all duration-300"/>
                       </div>
+                      
                       <div className='w-full hover:bg-[#444] bg-black transition-all duration-300 cursor-pointer flex items-center justify-center py-2'>
                         <p className='font-montserrat flex text-white font-extralight' onClick={()=> handleChange()}>AGREGAR AL CARRITO 
                         </p>

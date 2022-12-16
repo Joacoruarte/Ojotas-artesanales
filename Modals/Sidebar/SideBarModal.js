@@ -60,7 +60,6 @@ export default function SideBarModal({ setOpen }) {
           <>
             <li>
               <hr className="bg-slate-500 w-full my-2" />
-              {console.log(user)}
               <p>
                 Ingreso como <b>{user.email}</b>
               </p>

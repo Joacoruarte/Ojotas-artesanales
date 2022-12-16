@@ -28,7 +28,7 @@ export default function Card({ id, name, alt, img, price }) {
       <div className="mt-4 px-4 py-2 flex flex-col justify-center items-center">
           <Link href={`/product/${id}`}>
             <h3 className="text-sm cursor-pointer font-montserrat uppercase hover:underline text-gray-700">
-                {name + " artesanales"}
+                {name}
             </h3>
           </Link>
           <p className="text-lg font-bold text-gray-900">{transformToDinero(price)}</p>

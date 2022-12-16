@@ -2,6 +2,10 @@ import { Schema , model , models } from "mongoose";
 
 
 const productSchema = new Schema({
+    pid: {
+        type: String,
+        required: true,
+    },
     name:{
         type: String,
         required: [true, "El nombre es obligatorio"],
@@ -13,10 +17,10 @@ const productSchema = new Schema({
         default: "Foto de calzado"
     },
     img: {
-        type: String,
+        type: Array,
         required: [true, "La imagen es obligatoria"]
     },
-    color:{
+    description:{
         type: String,
         required: [true, "El color es obligatorio"]
     },
@@ -24,14 +28,10 @@ const productSchema = new Schema({
         type: Number,
         required: [true , "El precio es obligatorio"]
     },
-    talles: {
-        type: Array,
-        default: []
-    },
     stock: {
-        type: String,
+        type: Object,
         required: true
-    }
+    },
 }, {
     timestamps: true,
     versionKey: false

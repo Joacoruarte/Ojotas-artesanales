@@ -30,10 +30,10 @@ export default function Home({ products }) {
           <div className={`${styles.containerCards} gap-4 mx-auto px-9 mt-10`}>
             {products && Array.isArray(products) && products?.map((product, i) => (
                 <Card
-                  id={product._id}
+                  id={product.pid}
                   key={i}
                   alt={product.alt}
-                  img={product.img}
+                  img={product.img[0]}
                   color={product.color}
                   name={product.name}
                   price={product.price}

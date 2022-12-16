@@ -94,7 +94,6 @@ export default function Dashboard() {
         {tab === TABS.ADD_PRODUCT && (
             <div className='lg:mt-0 mt-44 w-full p-4 h-full min-h-screen'>
                 <h1 className='titleTab'>Agregar Producto</h1>
-
                 <CreateProducts/>
             </div>
         )}
