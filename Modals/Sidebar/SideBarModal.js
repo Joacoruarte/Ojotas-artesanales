@@ -59,11 +59,11 @@ export default function SideBarModal({ setOpen }) {
         ) : (
           <>
             <li>
-              <hr className="bg-slate-500 w-full my-2" />
-              <p>
+            <div className='bg-[#CCC] h-[0.5px] w-full'/>
+              <p className="my-4">
                 Ingreso como <b>{user.email}</b>
               </p>
-              <hr className="bg-slate-500 w-full my-2" />
+              <div className='bg-[#CCC] h-[0.5px] w-full mb-4'/>
               {user.role === "ADMIN" && (
                 <div
                   onClick={() => {
@@ -71,8 +71,8 @@ export default function SideBarModal({ setOpen }) {
                     setOpen(false);
                   }}
                 >
-                  <p>Panel Admin</p>
-                  <hr className="bg-slate-500 w-full my-2" />
+                  <p className="cursor-pointer w-max hover:underline hover:underline-offset-2">Panel Admin</p>
+                  <div className='bg-[#CCC] h-[0.5px] w-full my-4'/>
                 </div>
               )}
             </li>

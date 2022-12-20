@@ -1,0 +1,93 @@
+.containerImage:hover svg{
+    opacity: 1;
+}
+
+.containerImage{
+    display: flex;
+    position: relative;
+    width: 500px;
+    height: 670px;
+}
+
+.carrousel{
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 500px;
+    height: 670px;
+}
+
+.carrousel::-webkit-scrollbar{
+    width: 0px;
+}
+
+.carrousel > div{
+    display: block;
+    position: relative;
+    min-width: 500px;
+    min-height: 500px;
+}
+
+@media (max-width: 927px){
+    .carrousel{
+        width: 400px;
+    }
+    .carrousel > div {
+        min-width: 400px;
+    }
+}
+@media (max-width: 797px){
+    .carrousel{
+        width: 380px;
+    }
+    .carrousel > div {
+        min-width: 380px;
+    }
+}
+@media (max-width: 770px){
+    .containerImage{
+        width: 100%;
+        margin: 0 auto;
+    }
+    .carrousel{
+        width: 100%;
+        height: 600px;
+    }
+    .carrousel > div {
+        min-width: 100%;
+    }
+}
+@media (max-width: 640px){
+    .containerImage{
+        position: inherit;
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 600px){
+    .carrousel{
+        height: 600px;
+    }
+}
+@media (max-width: 480px){
+    .carrousel{
+        height: 600px;
+    }
+}
+@media (max-width: 600px){
+    .containerImage{
+        width: 400px;
+        height: 550px;
+    }
+}
+@media (max-width: 480px){
+    .containerImage{
+        width: 350px;
+        height: 550px;
+    }
+}
+@media (max-width: 415px){
+    .containerImage{
+        width: 300px;
+    }
+}
