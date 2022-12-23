@@ -15,30 +15,31 @@ import WhatsAppModal from '../../Modals/WhatsApp/WhatsAppModal'
 export default function ProductDetail() {
   const router = useRouter()
   const { id } = router.query
-  const cart = useContext(CartContext)
+  const shoppingCart = useContext(CartContext)
   const [stock , setStock] = useState(0)
   const [stockError , setStockError] = useState(false)
   const [open, setOpen] = useState(false);
   const [cartLoading , setCartLoading] = useState(false)
-  const [selectedSize, setSelectedSize] = useState(0);
+  const [selectedSize, setSelectedSize] = useState({size: '' , stock: 0 , _id: ''});
   const { loading , product } = useGetProductDetail(id)
 
   const handleChange = async () => {
-    if(stock === 0) return
+    if(selectedSize.stock === 0) return
     try {
       setCartLoading(true)
-      const res = await axios.post("/api/stock", {id})
-      setCartLoading(false)
-      if(stock > Number(res.data.stock)){
+      if(selectedSize.stock > product.stock[selectedSize.size].quantity){
         setStockError(true)
+        setCartLoading(false)
         setTimeout(()=> setStockError(false) , 3000)
         return
       }else{
-        if(cart.cart.find(item => item._id === id)){
+        if(shoppingCart.cart.find(item => item?._id === selectedSize._id)){
+          setCartLoading(false)
           return toast.success("Ya tienes este producto en el carrito")
         }
-        localStorage.setItem("cart", JSON.stringify(Array.from(new Set([...cart.cart , {...product , stock: stock}].map(JSON.stringify))).map(JSON.parse)))
-        cart.setCart(Array.from(new Set([...cart.cart , {...product , stock: res.data.stock}].map(JSON.stringify))).map(JSON.parse))
+        localStorage.setItem("cart", JSON.stringify([...shoppingCart.cart ,{...product, _id: selectedSize._id , stock: { [selectedSize.size]: selectedSize.stock}}]))
+        shoppingCart.setCart([...shoppingCart.cart ,{...product, _id: selectedSize._id , stock: { [selectedSize.size]: selectedSize.stock}}])
+        setCartLoading(false)
         toast.success("Agregaste este producto al carrito")
       }
     } catch (error) {
@@ -66,11 +67,11 @@ export default function ProductDetail() {
               </div>
             ) : ( 
               <div className={s.containerDataOfProduct}>
-                {product && (
+                {Object.keys(product).length > 0 && (
                   <>
                     {/* CAROUSEL DE IMAGENES */}
                     {product?.img && (
-                      <Carousel product={product}/>
+                      <Carousel product={product} interval={5000}/>
                     )}
 
                     {/* DESCRIPTION PRODUCT DETAIL */}
@@ -94,19 +95,21 @@ export default function ProductDetail() {
                           setOpen={setOpen}
                         />
                       )}                      
-
+                      {selectedSize.size !== '' && ( 
+                        <p className='font-montserrat'>Disponibilidad: <b className='font-sans'>{product.stock[selectedSize.size].quantity}</b></p>
+                      )} 
                       <div className='bg-[#CCC] h-[0.5px] w-full my-4'/>
 
                       {/* CANTIDAD DE PRODUCTO A ELEGIR*/}
                       <div className='my-2 flex flex-col'>
                         <label className='font-montserrat uppercase text-'>Cantidad</label>
-                        <input placeholder='0' value={stock} type='number' onChange={({target:{value}}) => value >= 0 && setStock(value)} className="w-[6rem] mt-1 h-8 border py-4 px-2 border-[#ccc] outline-none transition-all duration-300"/>
+                        <input placeholder='0' value={selectedSize.stock} type='number' onChange={({target:{value}}) => value >= 0 && setSelectedSize({...selectedSize, stock:value})} className="w-[6rem] mt-1 h-8 border py-4 px-2 border-[#ccc] outline-none transition-all duration-300"/>
                       </div>
                       
                       {/* BOTON AGEGAR AL CARRITO */}
-                      <div className='w-full hover:bg-[#444] bg-black transition-all duration-300 cursor-pointer flex items-center justify-center py-2'>
-                        <p className='font-montserrat flex text-white font-extralight' onClick={()=> handleChange()}>AGREGAR AL CARRITO 
-                        </p>
+                      <div className={`w-full ${selectedSize.size === '' ? 'bg-slate-600 pointer-events-none cursor-none' : 'bg-black'} hover:bg-[#444] transition-all duration-300 cursor-pointer flex items-center justify-center py-2`}>
+                        <button className='font-montserrat flex text-white font-extralight' onClick={()=> handleChange()}>AGREGAR AL CARRITO 
+                        </button>
                         {cartLoading && <div className={`${s.lds_ring_small}`}>
                           <div></div>
                           <div></div>

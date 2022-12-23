@@ -23,5 +23,5 @@ export const useGetProductDetail = (id) => {
         }
     }, [id]);
     
-    return { product, loading, error };
+    return { product, loading , error };
 }

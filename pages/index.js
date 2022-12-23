@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import Layout from "../Components/Layout";
 import Loading from "../Components/Loading";
+import Publicity from "../Components/Publicity";
 import styles from "../styles/Home.module.css";
 import axios from "../utils/configAxios";
-   
+
+
 export default function Home({ products }) {
   const [loading , setLoading] = useState(true);
 
@@ -41,6 +43,8 @@ export default function Home({ products }) {
             ))}
           </div>
         )} 
+
+        {/* <Publicity/> */}
       </Layout>
     </div>
   );

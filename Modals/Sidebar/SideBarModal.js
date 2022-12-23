@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import HeadOfSideBars from "../../Components/HeadOfSideBars";
 import AuthContext from "../../Context/AuthProvider/AuthContext";
 import XIcon from "../../Icons/XIcon";
 
@@ -8,15 +9,10 @@ export default function SideBarModal({ setOpen }) {
   const { user, setUser } = useContext(AuthContext);
   return (
     <div>
-      <div className="flex items-center justify-between w-full h-10">
-        <h2 className="font-bold text-[19px] font-montserrat">
-          OJOTAS ARTESANALES
-        </h2>
-        <XIcon
-          className="w-8 h-8 cursor-pointer"
-          onClick={() => setOpen(false)}
-        />
-      </div>
+      <HeadOfSideBars
+        title='OJOTAS ARTESANALES'
+        handleClick={() => setOpen(false)}
+      />
 
       <hr className="bg-slate-500 w-full my-2" />
 

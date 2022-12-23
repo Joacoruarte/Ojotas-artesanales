@@ -6,10 +6,13 @@ import Trash from "../../Icons/Trash";
 import XIcon from "../../Icons/XIcon";
 import s from "../../styles/CartModal.module.css";
 import { transformToDinero } from "../../utils/utils";
+import CartCard from "../../Components/CartCard";
+import HeadOfSideBars from "../../Components/HeadOfSideBars";
+import Separator from "../../Components/Separator";
 
 export default function CartModal({ open, setOpenCart }) {
   const { cart , setCart} = useContext(CartContext)
-
+  
   const handleBuyProducts = async () => {
     try {
       const res = await axios.post("/api/mercado-pago" , { cart })
@@ -23,20 +26,17 @@ export default function CartModal({ open, setOpenCart }) {
     <div className="flex flex-col">
 
       {/* EXIT BUTTON */}
-      <div className='flex items-center justify-between w-full h-10'>
-          <h2 className="font-bold font-montserrat">CARRITO DE COMPRAS</h2>
-          <XIcon className="w-8 h-8 cursor-pointer" onClick={()=> setOpenCart(false)}/>
-      </div>
+      <HeadOfSideBars
+        title='CARRITO DE COMPRAS'
+        handleClick={()=> setOpenCart(false)}
+      />
       
-
-      <hr className="bg-slate-500 w-full my-2"/>
-
+      <Separator className='mb-2'/>
       <div className="flex justify-between my-1 text-xs">
         <p className="font-montserrat ">PRODUCTO</p>
         <p className="font-montserrat">SUBTOTAL</p>
       </div>
-
-      <hr className="bg-slate-500 w-full my-2"/>
+      <Separator className='mt-2'/>
 
       {/* CART CONTENT */}
       
@@ -46,30 +46,8 @@ export default function CartModal({ open, setOpenCart }) {
         </p>
       ) : ( 
         <div className="flex flex-col w-full">
-          {cart.map((product , i) => (
-            <div className="flex gap-2 border-b py-2" key={i}>
-              <div className="">
-                <Image width={90} height={90} src={Array.isArray(product.img) ? product.img[0] : product.img} className="object-cover w-6 h-6 object-center"/>
-              </div>
-              <div className={`${s.midle} flex flex-col gap-2`}>
-                <span className="text-black text-sm font-montserrat">{product.name} <span className="text-xs">{"("}{product.color}{")"}</span></span>
-
-                <p className="font-montserrat text-sm">{transformToDinero(product.price)}</p>
-                
-                <div className={s.stockInputs}>
-                  <div className="border border-black cursor-pointer w-10 h-10">-</div>
-                  <div className="border border-black w-10 h-10 text-xs ">{product.stock}</div>
-                  <div className="border border-black cursor-pointer w-10 h-10">+</div>
-                </div>
-              </div>
-
-              <div className="flex flex-1 justify-end">
-                <Trash className={s.trushIcon} onClick={()=> {
-                  localStorage.setItem("cart", JSON.stringify(cart.filter((item) => item._id !== product._id)))
-                  setCart(cart.filter((item) => item._id !== product._id))
-                }}/>
-              </div>
-            </div>
+          {cart && cart?.map((product , i) => (
+            <CartCard product={product} key={i}/>
           ))}
           <div className={`${s.subTotal} border-b`}>
             <span className="text-black text-sm font-montserrat">Subtotal <span className="text-xs">{"("}sin envío{")"}</span></span>

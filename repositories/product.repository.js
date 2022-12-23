@@ -35,6 +35,23 @@ class Products {
         return products
     }
 
+    async getStockForProduct(res , req) { 
+        await dbConnect()
+        const { id , quantity } = req.body
+        const product = await this.product.findById(id)
+
+        if(product){
+            const stock = product.stock[Object.keys(product.stock)[0]]
+            if(quantity < stock){
+                return res.status(200).json(true)
+            }else{
+                return res.status(400).json(false)
+            }
+        }
+
+        return res.status(400).json({ error: 'Something went wrong'})
+    }
+
     async createProduct(res , req) {
         await dbConnect();
         const { stock } = req.body

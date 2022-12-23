@@ -3,8 +3,8 @@ import React from "react";
 export default function Sizes({ product , selectedSize, setSelectedSize , setOpen}) {
    const handleSize = (size) => {
         if(product.stock[size].quantity !== 0) { 
-            if(selectedSize === size) return setSelectedSize(0)
-            return setSelectedSize(size)
+            if(selectedSize.size === size) return setSelectedSize({ ...selectedSize, size: ''})
+            return setSelectedSize({...selectedSize , size , _id: product.stock[size]._id})
         }else {
             setOpen(true)
         }
@@ -24,7 +24,7 @@ export default function Sizes({ product , selectedSize, setSelectedSize , setOpe
                            className={`flex ${
                               product.stock[size].quantity === 0 
                               ? "bg-gray-100"
-                              : selectedSize === size ? 'bg-black text-white'
+                              : selectedSize.size === size ? 'bg-black text-white'
                               : "bg-white text-black"
                            } cursor-pointer border p-1 items-center justify-between my-2`}
                         >
