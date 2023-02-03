@@ -35,17 +35,22 @@ class Products {
         return products
     }
 
-    async getStockForProduct(res , req) { 
+    async getStockForProduct({req , res}) { 
         await dbConnect()
-        const { id , quantity } = req.body
+        const { id , quantity , op } = req.body
         const product = await this.product.findById(id)
 
         if(product){
-            const stock = product.stock[Object.keys(product.stock)[0]]
-            if(quantity < stock){
-                return res.status(200).json(true)
-            }else{
-                return res.status(400).json(false)
+            let stock = product.stock[Object.keys(product.stock)[0]]
+            stock = Number(stock)
+            
+            if(stock === 1) return res.status(400).json({ error: 'No hay mas stock disponible para este producto'})
+
+            if(op === '+'){
+                if(quantity === stock) return res.status(400).json({ error: 'No hay mas stock disponible para este producto'})
+                if(quantity < stock) return res.status(200).json(true)
+            }else {
+                if(quantity === stock) return res.status(200).json(true)
             }
         }
 

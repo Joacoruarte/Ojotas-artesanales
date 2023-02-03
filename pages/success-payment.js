@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { transformToDinero } from '../utils/utils';
 import s from "../styles/success-payment.module.css"
 import CartContext from '../Context/CartContext/CartContext';
+import SuccesPaymentCard from "../Components/SuccesPaymentCard";
 
 export default function SuccessPayment() {
   const router = useRouter();
@@ -38,31 +39,20 @@ export default function SuccessPayment() {
                 </div>
             ):(
             <div className='flex max-w-[34rem] mx-auto justify-center items-center flex-col h-full'>
-                <h1 className='font-montserrat text-[1.5rem]'>¡Felcidades su compra se acredito con exito!</h1>
+                <h1 className='font-montserrat text-[1.5rem]'>¡Felicidades, su compra se acreditó con éxito.!</h1>
 
-                <div className=''>
-                    <p className='font-montserrat text-left'>Estamos gestionando el envio para lo que recibas lo antes posible</p>
-                    <p className='font-montserrat text-left'>Resumen de la compra:</p>
-                </div>
+                <h2 className='font-montserrat w-full text-center'>Estamos gestionando el envío para que lo recibas lo antes posible.</h2>
+                
+                <h3 className='font-montserrat text-left my-4 w-full'>Resumen de la compra:</h3>
                 <div className='w-full px-4'>
-                    {products.length > 0 && products.map((product , i) => (
-                        <div className="flex gap-2 border-b py-2" key={i}>
-                            <div className="">
-                                <Image width={90} height={90} alt={product.alt} src={Array.isArray(product.img) ? product.img[0] : product.img} className="object-cover w-6 h-6 object-center"/>
-                            </div>
-                            <div className={`w-[10rem] flex flex-col gap-2`}>
-                            <span className="text-black text-sm font-montserrat">{product.name} <span className="text-xs">{"("}{product.color}{")"}</span></span>
-
-                            <p className="font-montserrat text-sm">{transformToDinero(product.price)}</p>
-                            
-                            <p className="w-10 h-10 text-xs ">Cantidad:{product.quantity}</p>
-                            </div>
-                        </div>
+                    {/* COMPONETIZAR */}
+                    {products.length > 0 && products.map((product) => (
+                        <SuccesPaymentCard product={product} key={product.id} />
                     ))}
                 </div>
 
                 <div className={`mt-4`}>
-                    <h2 className='font-montserrat font-bold '>Total: {transformToDinero(products.reduce((a, b) => a + b.price, 0))}</h2>
+                    <h2 className='font-montserrat font-bold '>Total: {transformToDinero(products.reduce((a, b) => a + (b.unit_price * b.quantity), 0))}</h2>
                 </div>
             </div>
             )

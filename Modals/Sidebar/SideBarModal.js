@@ -22,6 +22,7 @@ export default function SideBarModal({ setOpen }) {
             router.push("/");
             setOpen(false);
           }}
+          className="cursor-pointer"
         >
           Inicio
         </li>
@@ -30,6 +31,7 @@ export default function SideBarModal({ setOpen }) {
             router.push("/contacto");
             setOpen(false);
           }}
+          className="cursor-pointer"
         >
           Contacto
         </li>
@@ -48,6 +50,7 @@ export default function SideBarModal({ setOpen }) {
                 router.push("/register");
                 setOpen(false);
               }}
+              className="cursor-pointer"
             >
               Registrarse
             </li>
@@ -78,6 +81,7 @@ export default function SideBarModal({ setOpen }) {
                 localStorage.removeItem("user");
                 setUser({});
               }}
+              className="cursor-pointer"
             >
               Cerrar sesion
             </li>
