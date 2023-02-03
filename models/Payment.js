@@ -1,18 +1,18 @@
-import { Schema , model , models } from "mongoose";
+import { Schema, model, models } from 'mongoose'
 
 const paymentSchema = new Schema({
-    payment_id: {
-        type: String,
-        required: [true],
-        trim: true
-    },
-    product_id: {
-        type: Array,
-        required: [true],
-    },
+  payment_id: {
+    type: String,
+    required: [true],
+    trim: true
+  },
+  product_id: {
+    type: Array,
+    required: [true]
+  }
 }, {
-    timestamps: true,
-    versionKey: false
+  timestamps: true,
+  versionKey: false
 })
 
-export default models.Payment || model("Payment", paymentSchema)
+export default models.Payment || model('Payment', paymentSchema)

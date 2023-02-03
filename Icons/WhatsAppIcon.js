@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-export default function WhatsAppIcon(props) {
-   return (
+export default function WhatsAppIcon (props) {
+  return (
       <svg
          width={160}
          height={39}
@@ -105,5 +105,5 @@ export default function WhatsAppIcon(props) {
             </linearGradient>
          </defs>
       </svg>
-   );
+  )
 }

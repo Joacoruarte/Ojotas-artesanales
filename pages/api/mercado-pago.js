@@ -1,24 +1,24 @@
-import mercadopago from "mercadopago";
+import mercadopago from 'mercadopago'
 
 mercadopago.configure({
-    access_token: process.env.ACCESS_TOKEN_SECRET_PROD,
-});
+  access_token: process.env.ACCESS_TOKEN_SECRET_PROD
+})
 
-export default async function mercadoPago(req , res){
+export default async function mercadoPago (req, res) {
   const { cart } = req.body
-    let preference = {
-        items: [],
-        back_urls: {
-          success: "https://ojotasartesanal.com/success-payment",
-          failure: "https://ojotasartesanal.com/",
-          pending: "https://ojotasartesanal.com/",
-        },
-        auto_return: "approved",
-        statement_descriptor: "OJOTAS ARTESANALES",
-        shipments: {
-          cost: 1,
-          mode: "not_specified",
+  const preference = {
+    items: [],
+    back_urls: {
+      success: 'https://ojotasartesanal.com/success-payment',
+      failure: 'https://ojotasartesanal.com/',
+      pending: 'https://ojotasartesanal.com/'
     },
+    auto_return: 'approved',
+    statement_descriptor: 'OJOTAS ARTESANALES',
+    shipments: {
+      cost: 1,
+      mode: 'not_specified'
+    }
   }
 
   cart.forEach((product) => preference.items.push({
@@ -27,17 +27,17 @@ export default async function mercadoPago(req , res){
     description: product.description + `size: ${JSON.stringify(product.stock)} `,
     picture_url: product.img[0],
     unit_price: product.price,
-    quantity: parseInt(product.stock[Object.keys(product.stock)[0]]),
+    quantity: parseInt(product.stock[Object.keys(product.stock)[0]])
   }))
 
   console.log(preference)
   mercadopago.preferences
-  .create(preference)
-  .then(function (response) {
-    console.log(response.body.id)
-    res.status(200).json(response.body.init_point);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    .create(preference)
+    .then(function (response) {
+      console.log(response.body.id)
+      res.status(200).json(response.body.init_point)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
 }

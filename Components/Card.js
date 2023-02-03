@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
-import React from "react";
-import { transformToDinero } from "../utils/utils";
-import s from "../styles/Card.module.css";
+import Link from 'next/link'
+import Image from 'next/image'
+import React from 'react'
+import { transformToDinero } from '../utils/utils'
+import s from '../styles/Card.module.css'
 
-export default function Card({ id, name, alt, img, price }) {
+export default function Card ({ id, name, alt, img, price }) {
   return (
     <div className={`${s.cardImage} relative flex flex-col`}>
       <div className="min-h-60 relative sm:h-96 h-96 w-full -mb-4 overflow-hidden  bg-gray-200 group-hover:opacity-75">
@@ -28,5 +28,5 @@ export default function Card({ id, name, alt, img, price }) {
           <p className="text-lg font-bold text-gray-900">{transformToDinero(price)}</p>
       </div>
     </div>
-  );
+  )
 }

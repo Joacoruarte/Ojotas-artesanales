@@ -1,7 +1,7 @@
 import React from 'react'
-import { BsInstagram } from "react-icons/bs";
+import { BsInstagram } from 'react-icons/bs'
 
-export default function Footer() {
+export default function Footer () {
   return (
     <footer className='absolute bottom-0 flex justify-center items-center bg-gray-100 min-h-[10rem] w-full'>
         <div className='flex justify-around sm:flex-row flex-col sm:gap-0 gap-4 w-full items-center'>

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-export default function RightIcon(props) {
-   return (
+export default function RightIcon (props) {
+  return (
       <svg
          width={24}
          height={24}
@@ -12,5 +12,5 @@ export default function RightIcon(props) {
       >
          <path d="M4 .755L18.374 12 4 23.219l.619.781L20 12 4.609 0 4 .755z" />
       </svg>
-   );
+  )
 }

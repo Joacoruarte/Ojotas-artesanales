@@ -1,25 +1,25 @@
-import axios from "../../utils/configAxios";
-import React, { useContext } from "react";
-import CartContext from "../../Context/CartContext/CartContext";
-import s from "../../styles/CartModal.module.css";
-import { transformToDinero } from "../../utils/utils";
-import CartCard from "../../Components/CartCard";
-import HeadOfSideBars from "../../Components/HeadOfSideBars";
-import Separator from "../../Components/Separator";
+import axios from '../../utils/configAxios'
+import React, { useContext } from 'react'
+import CartContext from '../../Context/CartContext/CartContext'
+import s from '../../styles/CartModal.module.css'
+import { transformToDinero } from '../../utils/utils'
+import CartCard from '../../Components/CartCard'
+import HeadOfSideBars from '../../Components/HeadOfSideBars'
+import Separator from '../../Components/Separator'
 
-export default function CartModal({ open, setOpenCart }) {
-    const { cart, setCart } = useContext(CartContext);
+export default function CartModal ({ open, setOpenCart }) {
+  const { cart, setCart } = useContext(CartContext)
 
-    const handleBuyProducts = async () => {
-        try {
-            const res = await axios.post("/api/mercado-pago", { cart });
-            window.location.replace(res.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+  const handleBuyProducts = async () => {
+    try {
+      const res = await axios.post('/api/mercado-pago', { cart })
+      window.location.replace(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-    return (
+  return (
         <div className="flex flex-col">
             {/* EXIT BUTTON */}
             <HeadOfSideBars
@@ -38,11 +38,13 @@ export default function CartModal({ open, setOpenCart }) {
 
             {/* CART CONTENT */}
 
-            {cart.length === 0 ? (
+            {cart.length === 0
+              ? (
                 <p className="text-center text-[#c09853] font-montserrat text-xs">
                     EL CARRITO DE COMPRAS ESTA VACIO
                 </p>
-            ) : (
+                )
+              : (
                 <div className="flex flex-col w-full">
                     {cart &&
                         cart?.map((product, i) => (
@@ -55,14 +57,14 @@ export default function CartModal({ open, setOpenCart }) {
                         ))}
                     <div className={`${s.subTotal} border-b`}>
                         <span className="text-black text-sm font-montserrat">
-                            Subtotal{" "}
+                            Subtotal{' '}
                             <span className="text-xs">
-                                {"("}sin envío{")"}
+                                {'('}sin envío{')'}
                             </span>
                         </span>
                         <p className="font-bold font-montserrat">
                             {transformToDinero(
-                                cart.reduce((a, b) => a + (b.price * b.stock[Object.keys(b.stock)[0]]), 0)
+                              cart.reduce((a, b) => a + (b.price * b.stock[Object.keys(b.stock)[0]]), 0)
                             )}
                         </p>
                     </div>
@@ -76,7 +78,7 @@ export default function CartModal({ open, setOpenCart }) {
                         </p>
                     </div>
                 </div>
-            )}
+                )}
         </div>
-    );
+  )
 }

@@ -1,8 +1,8 @@
-import CartProvider from "../Context/CartContext/CartProvider";
-import "../styles/globals.css";
-import AuthProvider from "../Context/AuthProvider/AuthProvider";
- 
-function MyApp({ Component, pageProps }) {
+import CartProvider from '../Context/CartContext/CartProvider'
+import '../styles/globals.css'
+import AuthProvider from '../Context/AuthProvider/AuthProvider'
+
+function MyApp ({ Component, pageProps }) {
   return (
     <AuthProvider>
       <CartProvider>
@@ -11,4 +11,4 @@ function MyApp({ Component, pageProps }) {
     </AuthProvider>
   )
 }
-export default MyApp;
+export default MyApp

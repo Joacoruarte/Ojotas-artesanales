@@ -1,9 +1,9 @@
 import React from 'react'
-import { FiTruck } from "react-icons/fi";
-import { CiCreditCard1 } from "react-icons/ci";
-import { ImWhatsapp } from "react-icons/im";
+import { FiTruck } from 'react-icons/fi'
+import { CiCreditCard1 } from 'react-icons/ci'
+import { ImWhatsapp } from 'react-icons/im'
 
-export default function Publicity() {
+export default function Publicity () {
   return (
     <div className="w-full flex mt-20 mb-8 gap-4 justify-center m-auto">
     <div className="flex gap-2">
