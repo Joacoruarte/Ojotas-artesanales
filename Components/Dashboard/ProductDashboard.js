@@ -5,61 +5,81 @@ import { TABS, transformToDinero } from '../../utils/utils'
 import Trash from '../../Icons/Trash'
 import axios from '../../utils/configAxios'
 import toast from 'react-hot-toast'
-export default function ProductDashboard ({ product, setEditedProduct, setTab, refetch }) {
-  const handleSetEditProduct = () => {
+import Loading from '../Loading'
+import Table from '../Table'
+
+export default function ProductDashboard ({ products, loading, setEditedProduct, setTab, refetch }) {
+  const handleSetEditProduct = (product) => {
     setEditedProduct(product)
     setTab(TABS.EDIT_PRODUCT)
   }
 
-  const deleteProduct = () => {
-    axios.delete('/api/products', { data: { _id: product?._id } })
+  const deleteProduct = (product) => {
+    axios.delete('/api/products', { data: { pid: product?.pid } })
       .then(res => {
         toast.success(res.data.success)
         refetch()
       }).catch(err => {
-        console.log(err)
+        toast.error(err.response.data.error)
       })
   }
 
-  return (
-    <div className="flex justify-between gap-4 w-full border-b border-t py-4 border-gray-300">
-      <div className="min-w-[6rem] justify-center sm:ml-4 ml-0 flex items-center">
-        <Image
+  const mergeRowsData = (products) => {
+    const rows = products.map(product => {
+      return {
+        Imagen: <Image
           className="shadow-lg rounded-md"
           width={90}
           height={90}
           src={product?.img[0]}
           alt={product.alt}
           objectFit="cover"
-        />
-      </div>
-        <div className="lg:flex hidden lg:min-w-[6rem] w-full justify-center items-center">
-            <p>{product.name}</p>
+        />,
+        Nombre: product.name,
+        Precio: transformToDinero(product.price),
+        Stock: (
+            <div className='flex flex-col gap-2'>
+              {Object.keys(product.stock).sort().filter(e => e !== 'pid').map((key, i) => (
+                <div key={i} className="flex items-center border-b-2 justify-around gap-2 max-w-[140px] mx-auto">
+                  <p className="text-sm font-montserrat"><b>{key}</b>:</p>
+                  <p className="text-sm font-montserrat">{product.stock[key]}</p>
+                </div>
+              ))}
+            </div>
+        ),
+        Acciones: <div className="flex items-center justify-center sm:gap-4 sm:min-w-[6rem] gap-2 w-full">
+          <button
+            className="bg-[#051e34] active:scale-95 p-2 rounded-md transition-all duration-300"
+            onClick={() => handleSetEditProduct(product)}
+          >
+            <FiEdit className="sm:w-6 sm:h-6 w-4 h-4 text-white" />
+          </button>
+          <button onClick={() => deleteProduct(product)} className="bg-red-600 active:scale-95 p-2 rounded-md transition-all duration-300">
+            <Trash className="sm:w-6 sm:h-6 w-4 h-4 text-white" />
+          </button>
         </div>
-        <div className="lg:flex hidden lg:min-w-[6rem] w-full justify-center items-center">
-            <p>{product.color}</p>
-        </div>
-      <div className="sm:min-w-[6rem] w-full flex justify-center items-center">
-        <p>{transformToDinero(product.price)}</p>
-      </div>
-      <div className="sm:min-w-[6rem] w-full flex justify-center items-center">
-        {/* <p>{product.stock}</p> */}
-      </div>
-      <div className="sm:min-w-[6rem] w-full flex justify-center items-center">
-        {/* <p>{product.talles.join(" , ")}</p> */}
-      </div>
+      }
+    })
+    return rows
+  }
 
-      <div className="flex items-center justify-around sm:min-w-[6rem] w-full">
-        <button
-          className="bg-[#051e34] active:scale-95 p-2 rounded-md transition-all duration-300"
-          onClick={handleSetEditProduct}
-        >
-          <FiEdit className="w-6 h-6 text-white" />
-        </button>
-        <button onClick={deleteProduct} className="bg-red-600 active:scale-95 p-2 rounded-md transition-all duration-300">
-          <Trash className="w-[1.5rem] h-[1.5rem] text-white" />
-        </button>
-      </div>
+  return (
+    <div className='w-full mt-12 rounded-lg'>
+        {loading
+          ? <Loading />
+          : (
+          <Table
+              columns={[
+                'Imagen',
+                'Nombre',
+                // 'Descripción',
+                'Precio',
+                'Stock',
+                'Acciones'
+              ]}
+              rows={mergeRowsData(products)}
+          />
+            )}
     </div>
   )
 }

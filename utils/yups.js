@@ -9,3 +9,7 @@ export const registerSchema = yup.object().shape({
 export const loginSchema = yup.object().shape({
   email: yup.string().email('Debes ingresar un mail valido').required('El email es obligatorio')
 })
+
+export const contactSchema = yup.object().shape({
+  email: yup.string().email('Debes ingresar un mail valido').required('El email es obligatorio')
+})

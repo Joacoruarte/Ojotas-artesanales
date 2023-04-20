@@ -6,107 +6,115 @@ import { TABS } from '../utils/utils'
 import NavbarDashboardItem from '../Components/Dashboard/NavbarDashboardItem'
 import { useRouter } from 'next/router'
 import ProductDashboard from '../Components/Dashboard/ProductDashboard'
-import { useGetProducts } from '../hooks/useGetProducts'
 import { Toaster } from 'react-hot-toast'
-import Loading from '../Components/Loading'
 import CreateProducts from './add-product'
-import EditProduct from '../Components/Dashboard/EditProduct'
+import { useGetProducts } from '../hooks/useGetProducts'
 
 export default function Dashboard () {
   const router = useRouter()
+  const { products, loading, refetch } = useGetProducts()
   const [tab, setTab] = useState(TABS.PRODUCTS)
   const [editedProduct, setEditedProduct] = useState({})
-  const { products, loading, refetch } = useGetProducts()
 
   return (
-    <div className='flex w-full h-full'>
-        <Toaster position='top-right'/>
-        {/* SIDE BAR */}
-        <div className='lg:min-w-[12.5rem]  lg:min-h-screen w-[0rem] h-24 '>
-            <nav className='dashboardNavbar'>
-                <h1 className='text-white font-montserrat fixed lg:top-20 top-4 w-full text-center hover:underline underline-offset-4 cursor-pointer' onClick={() => router.push('/')}>OJOTAS ARTESANALES</h1>
-                <ul className='w-full flex lg:flex-col flex-row lg:gap-4 gap-0'>
-                    <NavbarDashboardItem
-                        icon={() => <GiFlipFlops className='navbar_dashboard_icon'/>}
-                        active={tab === TABS.PRODUCTS}
-                        handleTab={() => tab !== TABS.PRODUCTS && setTab(TABS.PRODUCTS)}
-                        text='Productos'
-                    />
-                    <NavbarDashboardItem
-                        icon={() => <BiBox className='navbar_dashboard_icon'/>}
-                        active={tab === TABS.ADD_PRODUCT}
-                        handleTab={() => tab !== TABS.ADD_PRODUCT && setTab(TABS.ADD_PRODUCT)}
-                        text='Agregar Producto'
-                    />
-                    <NavbarDashboardItem
-                        icon={() => <FiEdit className='navbar_dashboard_icon'/>}
-                        active={tab === TABS.EDIT_PRODUCT}
-                        handleTab={() => tab !== TABS.EDIT_PRODUCT && setTab(TABS.EDIT_PRODUCT)}
-                        text='Editar producto'
-                    />
-                </ul>
-            </nav>
-        </div>
-
-        {tab === TABS.PRODUCTS && (
-            <div className='lg:mt-0 mt-44 w-full p-4 h-full min-h-screen'>
-                <h1 className='titleTab'>Productos</h1>
-
-                <div className='flex mt-8 w-full'>
-                    <ul className='flex w-full justify-between text-center font-montserrat'>
-                        <li className='sm:min-w-[6rem] w-full flex flex-col gap-4'>
-                            <p className='underline sm:text-base text-sm underline-offset-4 font-bold text-[#051e34]'>Imagen</p>
-                        </li>
-                        <li className='lg:flex hidden lg:min-w-[6rem] w-full flex-col gap-4'>
-                            <p className='underline  sm:text-base text-sm  underline-offset-4 font-bold text-[#051e34]'>Nombre</p>
-                        </li>
-                        <li className='lg:flex hidden lg:min-w-[6rem] w-full flex-col gap-4'>
-                            <p className='underline  sm:text-base text-sm underline-offset-4 font-bold text-[#051e34]'>Descripcion</p>
-                        </li>
-                        <li className='sm:min-w-[6rem] w-full flex flex-col gap-4'>
-                            <p className='underline  sm:text-base text-sm underline-offset-4 font-bold text-[#051e34]'>Precio</p>
-                        </li>
-                        <li className='sm:min-w-[6rem] w-full flex flex-col gap-4'>
-                            <p className='underline  sm:text-base text-sm underline-offset-4 font-bold text-[#051e34]'>Stock</p>
-                        </li>
-                        <li className='sm:min-w-[6rem] w-full flex flex-col gap-4'>
-                            <p className='underline  sm:text-base text-sm underline-offset-4 font-bold text-[#051e34]'>Talles</p>
-                        </li>
-                        <li className='sm:min-w-[6rem] w-full flex flex-col gap-4'>
-                            <p className='underline sm:text-base text-sm  underline-offset-4 font-bold text-[#051e34]'>Acciones</p>
-                        </li>
+        <div className="flex w-full h-full">
+            <Toaster position="top-right" />
+            {/* SIDE BAR */}
+            <div className="lg:min-w-[12.5rem]  lg:min-h-screen w-[0rem] h-24 ">
+                <nav className="dashboardNavbar">
+                    <h1
+                        className="text-white font-montserrat fixed lg:top-20 top-4 w-full text-center hover:underline underline-offset-4 cursor-pointer"
+                        onClick={() => router.push('/')}
+                    >
+                        OJOTAS ARTESANALES
+                    </h1>
+                    <ul className="w-full flex lg:flex-col flex-row lg:gap-4 gap-0">
+                        <NavbarDashboardItem
+                            icon={() => (
+                                <GiFlipFlops className="navbar_dashboard_icon" />
+                            )}
+                            active={tab === TABS.PRODUCTS}
+                            handleTab={() =>
+                              tab !== TABS.PRODUCTS && setTab(TABS.PRODUCTS)
+                            }
+                            text="Productos"
+                        />
+                        <NavbarDashboardItem
+                            icon={() => (
+                                <BiBox className="navbar_dashboard_icon" />
+                            )}
+                            active={tab === TABS.ADD_PRODUCT}
+                            handleTab={() =>
+                              tab !== TABS.ADD_PRODUCT &&
+                                setTab(TABS.ADD_PRODUCT)
+                            }
+                            text="Agregar Producto"
+                        />
+                        <NavbarDashboardItem
+                            icon={() => (
+                                <FiEdit className="navbar_dashboard_icon" />
+                            )}
+                            active={tab === TABS.EDIT_PRODUCT}
+                            handleTab={() =>
+                              tab !== TABS.EDIT_PRODUCT &&
+                                setTab(TABS.EDIT_PRODUCT)
+                            }
+                            text="Editar producto"
+                        />
                     </ul>
+                </nav>
+            </div>
+
+            {tab === TABS.PRODUCTS && (
+                <div className="lg:mt-0 mt-44 w-full p-4 h-full min-h-screen">
+                    <h1 className="titleTab sm:flex hidden">Productos</h1>
+                    <ProductDashboard
+                        setEditedProduct={setEditedProduct}
+                        setTab={setTab}
+                        products={products}
+                        loading={loading}
+                        refetch={refetch}
+                    />
                 </div>
-                <div className='flex w-full overflow-y-scroll containerScroll max-h-[78vh] flex-col gap-4 mt-4'>
-                    {loading
+            )}
+
+            {tab === TABS.ADD_PRODUCT && (
+                <div className="lg:mt-0 mt-44 w-full p-4 h-full min-h-screen">
+                    <h1 className="titleTab">Agregar Producto</h1>
+                    <CreateProducts />
+                </div>
+            )}
+
+            {tab === TABS.EDIT_PRODUCT && (
+                <div className="lg:mt-0 mt-44 w-full p-4 h-full min-h-screen">
+                    <h1 className="titleTab">Editar producto</h1>
+                    {Object.keys(editedProduct).length === 0
                       ? (
-                        <Loading/>
+                        <div className="grid place-content-center w-full h-[80vh]">
+                            <div className='flex flex-col gap-4'>
+                                <h1 className="text-2xl font-montserrat">
+                                    No hay productos para editar
+                                </h1>
+                                <button
+                                    className="bg-black hover:bg-[#444] disabled:bg-[#71717E] disabled:pointer-events-none disabled:cursor-none text-white font-montserrat transition-all duration-300 cursor-pointer flex items-center justify-center py-2"
+                                    onClick={() => setTab(TABS.PRODUCTS)}
+                                >
+                                    VOLVER A PRODUCTOS
+                                </button>
+                            </div>
+                        </div>
                         )
                       : (
-                    <>
-                        {products && products.map(product => <ProductDashboard refetch={refetch} key={product._id} product={product} setEditedProduct={setEditedProduct} setTab={setTab}/>)}
-                    </>
+                            <CreateProducts
+                                edit={editedProduct}
+                                setEdit={setEditedProduct}
+                                refetch={refetch}
+                                setTab={() => setTab(TABS.PRODUCTS)}
+                                tab={tab}
+                            />
                         )}
                 </div>
-            </div>
-        )}
-
-        {tab === TABS.ADD_PRODUCT && (
-            <div className='lg:mt-0 mt-44 w-full p-4 h-full min-h-screen'>
-                <h1 className='titleTab'>Agregar Producto</h1>
-                <CreateProducts/>
-            </div>
-        )}
-
-        {tab === TABS.EDIT_PRODUCT && (
-            <EditProduct
-                editedProduct={editedProduct}
-                setEditedProduct={setEditedProduct}
-                refetch={refetch}
-                setTab={setTab}
-                tab={tab}
-            />
-        )}
-    </div>
+            )}
+        </div>
   )
 }

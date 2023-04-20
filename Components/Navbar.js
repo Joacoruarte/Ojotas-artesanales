@@ -145,7 +145,7 @@ export default function Navbar ({ home }) {
         <div>
           <div onClick={() => setOpenCart(false)} className={`${!openCart && 'opacity-0 -z-10 hidden'} inset-0 transition-all duration-300 w-full h-full bg-slate-600 bg-opacity-50 z-[300] fixed`}>
           </div>
-          <div className={`${openCart === true ? s.showCart : s.hideCart} sm:w-[25rem] w-[23rem] fixed right-0 bg-white px-4 py-2 h-screen shadow-xl`} style={{ zIndex: 10000 }}>
+          <div className={`${openCart === true ? s.showCart : s.hideCart} overflow-y-scroll sm:w-[25rem] w-[23rem] fixed right-0 bg-white px-4 py-2 h-screen shadow-xl`} style={{ zIndex: 10000 }}>
             <CartModal setOpenCart={setOpenCart}/>
           </div>
         </div>

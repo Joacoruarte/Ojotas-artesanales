@@ -157,28 +157,21 @@ export default function ProductDetail () {
                     </div>
 
                     {/* BOTON AGEGAR AL CARRITO */}
-                    <div
-                      className={`w-full ${
-                        selectedSize.size === ''
-                          ? 'bg-slate-600 pointer-events-none cursor-none'
-                          : 'bg-black'
-                      } hover:bg-[#444] transition-all duration-300 cursor-pointer flex items-center justify-center py-2`}
-                    >
                       <button
-                        className="font-montserrat flex text-white font-extralight"
+                        disabled={Number(selectedSize.stock) === 0 || selectedSize.size === ''}
+                        className={'w-full bg-black hover:bg-[#444] disabled:bg-[#71717E] disabled:pointer-events-none disabled:cursor-none text-white font-montserrat transition-all duration-300 cursor-pointer flex items-center justify-center py-2'}
                         onClick={() => handleChange()}
                       >
                         AGREGAR AL CARRITO
-                      </button>
-                      {cartLoading && (
+                        {cartLoading && (
                         <div className={`${s.lds_ring_small}`}>
                           <div></div>
                           <div></div>
                           <div></div>
                           <div></div>
                         </div>
-                      )}
-                    </div>
+                        )}
+                      </button>
 
                     {/* ERROR STOCK */}
                     <div className="h-10 max-w-[300px]">

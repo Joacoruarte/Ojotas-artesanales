@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import Product from '../models/Product'
 import dbConnect from '../utils/db'
 
@@ -8,10 +9,17 @@ class Products {
 
   async getAllProducts (res, req) {
     await dbConnect()
-    const hash = {}
     let products = await this.product.find({})
-    // eslint-disable-next-line no-return-assign
-    products = products.filter(o => hash[o.pid] ? false : hash[o.pid] = true)
+    // REDUCIMOS EL ARRAY DE PRODUCTOS PARA QUE NO SE REPITAN LOS PRODUCTOS CON MISMO PID Y SUMAMOS EL STOCK DE CADA PRODUCTO
+    products = Object.values(products.reduce((acc, cur) => {
+      if (acc[cur.pid]) {
+        acc[cur.pid].stock = { ...acc[cur.pid].stock, ...cur.stock }
+      } else {
+        acc[cur._doc.pid] = { ...cur._doc }
+      }
+      return acc
+    }, {}))
+
     return res.status(200).json({ success: true, count: products.length, data: products })
   }
 
@@ -62,6 +70,7 @@ class Products {
     await dbConnect()
     const { stock } = req.body
     try {
+      // CREAMOS UN PRODUCTO POR CADA TALLA
       Object.keys(stock).forEach(async (key) => {
         const transFormProduct = {
           ...req.body,
@@ -70,7 +79,6 @@ class Products {
             [key]: stock[key]
           }
         }
-        console.log(transFormProduct)
         const product = await this.product.create(transFormProduct)
         product.save()
       })
@@ -82,18 +90,65 @@ class Products {
   }
 
   async updateProduct (res, req) {
-    await dbConnect()
-    const { _id } = req.body
-    const productUpdate = await this.product.findByIdAndUpdate(_id, req.body)
-    productUpdate.save()
-    res.status(201).json({ success: 'Se actualizo el producto correctamente' })
+    try {
+      await dbConnect()
+      const { pid } = req.body
+      const stocks = req.body.stock
+
+      // BUSCAMOS TODOS LOS PRODUCTOS CON EL MISMO PID
+      let products = await this.product.find({ pid })
+
+      // ACTUALIZAMOS EL STOCK DE CADA PRODUCTO
+      products = products.map(p => {
+        return {
+          ...req.body,
+          _id: p._doc._id,
+          pid,
+          stock: {
+            [Object.keys(p._doc.stock)[0]]: stocks[Object.keys(p._doc.stock)[0]]
+          }
+        }
+      })
+
+      // ACTUALIZAMOS LOS PRODUCTOS
+      const updatePromises = products.map((product) => {
+        return this.product.findByIdAndUpdate(product._id, product)
+      })
+
+      // ESPERAMOS A QUE SE ACTUALICEN TODOS LOS PRODUCTOS
+      await Promise.all(updatePromises)
+
+      res.status(201).json({ success: 'Se actualizo el producto correctamente' })
+    } catch (error) {
+      console.log(error)
+      return res.status(400).json({ error: 'No se pudo actualizar el producto' })
+    }
   }
 
   async deleteProduct (res, req) {
-    await dbConnect()
-    const productDelete = await this.product.findByIdAndDelete(req.body._id)
-    productDelete.save()
-    res.status(201).json({ success: 'Se elimino el producto correctamente' })
+    try {
+      await dbConnect()
+      const { pid } = req.body
+
+      // BUSCAMOS TODOS LOS PRODUCTOS CON EL MISMO PID
+      let products = await this.product.find({ pid })
+
+      // OBTENEMOS LOS IDS DE LOS PRODUCTOS
+      products = products.map(p => p._doc._id)
+
+      // ELIMINAMOS LOS PRODUCTOS
+      const deletePromises = products.map((product) => {
+        return this.product.findByIdAndDelete(product)
+      })
+
+      // ESPERAMOS A QUE SE ELIMINEN TODOS LOS PRODUCTOS
+      await Promise.all(deletePromises)
+
+      res.status(201).json({ success: 'Se elimino el producto correctamente' })
+    } catch (error) {
+      console.log(error)
+      return res.status(400).json({ error: 'No se pudo eliminar el producto' })
+    }
   }
 }
 

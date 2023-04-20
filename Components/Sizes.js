@@ -3,8 +3,8 @@ import React from 'react'
 export default function Sizes ({ product, selectedSize, setSelectedSize, setOpen }) {
   const handleSize = (size) => {
     if (product.stock[size].quantity !== 0) {
-      if (selectedSize.size === size) return setSelectedSize({ ...selectedSize, size: '' })
-      return setSelectedSize({ ...selectedSize, size, _id: product.stock[size]._id })
+      if (selectedSize.size === size) return setSelectedSize({ ...selectedSize, size: '', stock: 0 })
+      return setSelectedSize({ ...selectedSize, size, _id: product.stock[size]._id, stock: 1 })
     } else {
       setOpen(true)
     }
