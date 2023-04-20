@@ -28,6 +28,7 @@ class Products {
     let products = {}
     const findProducts = await this.product.find({ pid: id })
 
+    // BUSCAMOS EL PRODUCTO CON EL PID Y SUMAMOS EL STOCK DE CADA PRODUCTO
     findProducts.forEach(product => {
       products = {
         ...product._doc,
