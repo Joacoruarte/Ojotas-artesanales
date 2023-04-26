@@ -1,5 +1,4 @@
 /* eslint-disable multiline-ternary */
-import axios from '../../utils/configAxios'
 import React, { useContext } from 'react'
 import CartContext from '../../Context/CartContext/CartContext'
 import s from '../../styles/CartModal.module.css'
@@ -7,9 +6,11 @@ import { transformToDinero } from '../../utils/utils'
 import CartCard from '../../Components/CartCard'
 import HeadOfSideBars from '../../Components/HeadOfSideBars'
 import Separator from '../../Components/Separator'
+import { useRouter } from 'next/router'
 
 export default function CartModal ({ open, setOpenCart }) {
   const { cart, setCart } = useContext(CartContext)
+  const router = useRouter()
 
   const handleShowSubtotal = () => {
     const subtotal = cart.reduce(
@@ -19,13 +20,8 @@ export default function CartModal ({ open, setOpenCart }) {
     return transformToDinero(subtotal)
   }
 
-  const handleBuyProducts = async () => {
-    try {
-      const res = await axios.post('/api/mercado-pago', { cart })
-      window.location.replace(res.data)
-    } catch (error) {
-      console.log(error)
-    }
+  const handleRedirectToSendForm = () => {
+    router.push('/send-form')
   }
 
   return (
@@ -63,64 +59,6 @@ export default function CartModal ({ open, setOpenCart }) {
                                 key={product._id}
                             />
                         ))}
-                    {/* FORM */}
-                    <div className='flex flex-col gap-2'>
-                        <form className="flex flex-col gap-2">
-                            <p className="font-montserrat text-xs py-2 border-b">DATOS DE CONTACTO</p>
-                            <div>
-                                <label className='font-montserrat text-xs'>Email</label>
-                                <input type="email" className={`${s.input} font-montserrat`} />
-                            </div>
-
-                            <p className="font-montserrat text-xs py-2 border-b">DATOS DE LA ENTREGA</p>
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-montserrat text-xs'>Codigo postal</label>
-                                <input type="text" className={`${s.input} max-w-[100px] font-montserrat`} />
-                            </div>
-
-                            <p className="font-montserrat text-xs py-2 border-b">DATOS DEL DESTINATARIO</p>
-                            <div className='flex gap-2'>
-                                <div className='flex flex-col gap-2'>
-                                    <label className='font-montserrat text-xs'>Nombre</label>
-                                    <input type="text" className={`${s.input} font-montserrat`} />
-                                </div>
-                                <div className='flex flex-col gap-2'>
-                                    <label className='font-montserrat text-xs'>Apellido</label>
-                                    <input type="text" className={`${s.input} font-montserrat`} />
-                                </div>
-                            </div>
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-montserrat text-xs'>Teléfono</label>
-                                <input type="text" className={`${s.input} font-montserrat`} />
-                            </div>
-
-                            <p className="font-montserrat text-xs py-2 border-b">DATOS DEL DOMICILIO</p>
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-montserrat text-xs'>Calle</label>
-                                <input type="text" className={`${s.input} font-montserrat`} />
-                            </div>
-                            <div className='flex gap-2'>
-                                <div className='flex flex-col gap-2'>
-                                    <label className='font-montserrat text-xs'>Numero</label>
-                                    <input type="text" className={`${s.input} font-montserrat`} />
-                                </div>
-                                <div className='flex flex-col gap-2'>
-                                    <label className='font-montserrat text-xs'>Piso (opcional)</label>
-                                    <input type="text" className={`${s.input} font-montserrat`} />
-                                </div>
-                            </div>
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-montserrat text-xs'>Ciudad</label>
-                                <input type="text" className={`${s.input} font-montserrat`} />
-                            </div>
-
-                            <p className="font-montserrat text-xs py-2 border-b">DATOS DE FACTURACION</p>
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-montserrat text-xs'>DNI o CUIL</label>
-                                <input type="text" className={`${s.input} font-montserrat`} />
-                            </div>
-                        </form>
-                    </div>
                     {/* SUBTOTAL */}
                     <div className={`${s.subTotal} border-b`}>
                         <span className="text-black text-xs font-montserrat">
@@ -134,10 +72,10 @@ export default function CartModal ({ open, setOpenCart }) {
                         </p>
                     </div>
 
-                    <div className="w-full hover:bg-[#444] bg-black transition-all duration-300 cursor-pointer flex items-center justify-center py-2">
+                    <div onClick={() => handleRedirectToSendForm()} className="w-full hover:bg-[#444] bg-black transition-all duration-300 cursor-pointer flex items-center justify-center py-2">
                         <p
                             className="font-montserrat text-white font-extralight"
-                            onClick={() => handleBuyProducts()}
+
                         >
                             INICIAR COMPRA
                         </p>

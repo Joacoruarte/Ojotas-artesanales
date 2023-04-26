@@ -13,3 +13,15 @@ export const loginSchema = yup.object().shape({
 export const contactSchema = yup.object().shape({
   email: yup.string().email('Debes ingresar un mail valido').required('El email es obligatorio')
 })
+
+export const sendFormSchema = yup.object().shape({
+  email: yup.string().email('Debes ingresar un mail valido').required('El email es obligatorio'),
+  postalCode: yup.string().required('El codigo postal es obligatorio'),
+  name: yup.string().required('El nombre es obligatorio'),
+  lastName: yup.string().required('El apellido es obligatorio'),
+  phoneNumber: yup.string().required('El telefono es obligatorio'),
+  street: yup.string().required('La calle es obligatoria'),
+  streetNumber: yup.string().required('El numero es obligatorio'),
+  city: yup.string().required('La ciudad es obligatoria'),
+  identification: yup.string().required('El DNI o CUIL es obligatorio')
+})

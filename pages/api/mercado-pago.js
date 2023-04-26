@@ -1,11 +1,19 @@
 import mercadopago from 'mercadopago'
+import Shipment from '../../repositories/shipment.repository'
 
 mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN_SECRET_PROD
 })
 
 export default async function mercadoPago (req, res) {
-  const { cart } = req.body
+  const { cart, form } = req.body
+
+  const shipmentRepository = new Shipment()
+
+  const shipment = await shipmentRepository.createShipment(form)
+
+  if (!shipment) return res.status(400).json({ success: false, message: 'Error al crear el envio' })
+
   const preference = {
     items: [],
     back_urls: {
@@ -14,6 +22,7 @@ export default async function mercadoPago (req, res) {
       pending: 'https://ojotasartesanal.com/'
     },
     auto_return: 'approved',
+    notification_url: 'https://www.ojotasartesanal.com/api/payments',
     statement_descriptor: 'OJOTAS ARTESANALES',
     shipments: {
       cost: 1,
@@ -30,7 +39,6 @@ export default async function mercadoPago (req, res) {
     quantity: parseInt(product.stock[Object.keys(product.stock)[0]])
   }))
 
-  console.log(preference)
   mercadopago.preferences
     .create(preference)
     .then(function (response) {
