@@ -32,9 +32,10 @@ export default async function payments (req, res) {
     if (responseApi) {
       const shipmentId = responseApi.description.split('shipment_id:')[1]
       console.log('SHIPMENT ID OBTENIDO:', shipmentId)
+      const shipmentRepository = new Shipment()
       let shipment
       try {
-        shipment = await Shipment.updateStatusShipment(shipmentId)
+        shipment = await shipmentRepository.updateStatusShipment(shipmentId)
       } catch (error) {
         console.log('HUBO UN ERROR AL ACTUALIZAR EL SHIPMENT', error)
         return res.status(400).json({ message: 'error' })
