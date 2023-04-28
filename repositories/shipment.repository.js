@@ -10,7 +10,7 @@ class Shipment {
     await dbConnect()
     const shipment = await this.shipment.create(formDetails)
     shipment.save()
-    return !!shipment
+    return shipment
   }
 
   async getShipments (req, res) {

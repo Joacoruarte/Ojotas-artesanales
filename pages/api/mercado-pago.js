@@ -9,8 +9,12 @@ export default async function mercadoPago (req, res) {
   const { cart, form } = req.body
 
   const shipmentRepository = new Shipment()
+  const productsId = cart.map((product) => product._id)
 
-  const shipment = await shipmentRepository.createShipment(form)
+  const shipment = await shipmentRepository.createShipment({
+    ...form,
+    products_id: productsId
+  })
 
   if (!shipment) return res.status(400).json({ success: false, message: 'Error al crear el envio' })
 
@@ -36,7 +40,8 @@ export default async function mercadoPago (req, res) {
     description: product.description + `size: ${JSON.stringify(product.stock)} `,
     picture_url: product.img[0],
     unit_price: product.price,
-    quantity: parseInt(product.stock[Object.keys(product.stock)[0]])
+    quantity: parseInt(product.stock[Object.keys(product.stock)[0]]),
+    shipment_id: shipment._doc._id
   }))
 
   mercadopago.preferences
