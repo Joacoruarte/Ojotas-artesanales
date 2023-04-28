@@ -37,11 +37,10 @@ export default async function mercadoPago (req, res) {
   cart.forEach((product) => preference.items.push({
     id: product._id,
     title: product.name,
-    description: product.description + `size: ${JSON.stringify(product.stock)} `,
+    description: product.description + ` size: ${JSON.stringify(product.stock)} shipment_id:${shipment._doc._id}`,
     picture_url: product.img[0],
     unit_price: product.price,
-    quantity: parseInt(product.stock[Object.keys(product.stock)[0]]),
-    shipment_id: shipment._doc._id
+    quantity: parseInt(product.stock[Object.keys(product.stock)[0]])
   }))
 
   mercadopago.preferences

@@ -13,6 +13,16 @@ class Shipment {
     return shipment
   }
 
+  async updateStatusShipment (id) {
+    try {
+      await dbConnect()
+      const shipment = await this.shipment.findOneAndUpdate({ _id: id }, { $set: { status: 'approved' } })
+      return shipment
+    } catch (error) {
+      return error
+    }
+  }
+
   async getShipments (req, res) {
     await dbConnect()
     const shipments = await this.shipment.find({})
