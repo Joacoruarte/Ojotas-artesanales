@@ -17,6 +17,15 @@ export default async function succesPayment (req, res) {
     }
   )
 
+  function getSize (str) {
+    // Obtener la posición del inicio del objeto después de "size:"
+    const start = str.indexOf('size: ') + 5
+    const end = str.indexOf('ship')
+    // Obtener la parte del string que contiene el objeto
+    const objStr = str.substring(start, end)
+    return JSON.parse(objStr.trim())
+  }
+
   const responseApi = infoApi.data.additional_info.items
   if (responseApi) {
     const productsIds = responseApi.map((product) => product.id)
@@ -30,8 +39,7 @@ export default async function succesPayment (req, res) {
     products = products.map((product, i) => {
       const equals = responseApi.find((item) => item.id === product._id.toString())
       if (equals) {
-        const stock = equals.description.split('size: ')[1]
-        const stockObject = JSON.parse(stock)
+        const stockObject = getSize(equals.description)
         const calc = parseInt(product.stock[Object.keys(product.stock)[0]]) - parseInt(stockObject[Object.keys(stockObject)[0]])
         const validateKey = Object.keys(product.stock)[0].split('/').join('') === Object.keys(stockObject)[0]
         return {

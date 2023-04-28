@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default async function payments (req, res) {
   const infoApi = await axios.get(
-    'https://api.mercadopago.com/v1/payments/' + '57378447537',
+    'https://api.mercadopago.com/v1/payments/' + '57378817357',
     {
       headers: {
         Authorization: `Bearer ${process.env.ACCESS_TOKEN_SECRET_PROD}`
