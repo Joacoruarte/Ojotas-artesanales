@@ -28,6 +28,12 @@ class Shipment {
     const shipments = await this.shipment.find({})
     res.status(200).json({ success: true, data: shipments })
   }
+
+  async getShipment (id) {
+    await dbConnect()
+    const shipment = await this.shipment.findById(id)
+    return shipment._doc
+  }
 }
 
 export default Shipment

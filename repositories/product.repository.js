@@ -23,6 +23,13 @@ class Products {
     return res.status(200).json({ success: true, count: products.length, data: products })
   }
 
+  async getOneProduct (id) {
+    await dbConnect()
+    const product = await this.product.findById(id)
+    console.log(id)
+    return product._doc
+  }
+
   async getProductById (res, req, id) {
     await dbConnect()
     let products = {}

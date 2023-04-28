@@ -42,5 +42,6 @@ export const handleClickButton = (tab, select, setSelect) => {
 export const TABS = {
   PRODUCTS: 'PRODUCTS',
   ADD_PRODUCT: 'ADD_PRODUCT',
-  EDIT_PRODUCT: 'EDIT_PRODUCT'
+  EDIT_PRODUCT: 'EDIT_PRODUCT',
+  SHIPMENTS: 'SHIPMENTS'
 }

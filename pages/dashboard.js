@@ -3,12 +3,14 @@ import { GiFlipFlops } from 'react-icons/gi'
 import { BiBox } from 'react-icons/bi'
 import { FiEdit } from 'react-icons/fi'
 import { TABS } from '../utils/utils'
+import { BsBoxSeam } from 'react-icons/bs'
 import NavbarDashboardItem from '../Components/Dashboard/NavbarDashboardItem'
 import { useRouter } from 'next/router'
 import ProductDashboard from '../Components/Dashboard/ProductDashboard'
 import { Toaster } from 'react-hot-toast'
 import CreateProducts from './add-product'
 import { useGetProducts } from '../hooks/useGetProducts'
+import ShipmentDashboard from '../Components/Dashboard/ShipmentDashboard'
 
 export default function Dashboard () {
   const router = useRouter()
@@ -60,6 +62,17 @@ export default function Dashboard () {
                                 setTab(TABS.EDIT_PRODUCT)
                             }
                             text="Editar producto"
+                        />
+                        <NavbarDashboardItem
+                            icon={() => (
+                                <BsBoxSeam className="navbar_dashboard_icon" />
+                            )}
+                            active={tab === TABS.SHIPMENTS}
+                            handleTab={() =>
+                              tab !== TABS.SHIPMENTS &&
+                                setTab(TABS.SHIPMENTS)
+                            }
+                            text="Envios"
                         />
                     </ul>
                 </nav>
@@ -113,6 +126,13 @@ export default function Dashboard () {
                                 tab={tab}
                             />
                         )}
+                </div>
+            )}
+
+            {tab === TABS.SHIPMENTS && (
+                <div className="lg:mt-0 mt-44 w-full p-4 h-full min-h-screen">
+                    <h1 className="titleTab">Envios</h1>
+                    <ShipmentDashboard />
                 </div>
             )}
         </div>
