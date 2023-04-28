@@ -39,7 +39,14 @@ export const shipmentSchema = new Schema({
   identification: {
     type: String,
     required: [true, 'El DNI o CUIL es obligatorio']
+  },
+  status: {
+    type: String,
+    default: 'pending',
+    enum: ['pending', 'approved', 'rejected']
   }
+}, {
+  timestamps: true
 })
 
 export default models.Shipments || model('Shipments', shipmentSchema)
