@@ -5,6 +5,14 @@ export function transformToDinero (numero) {
   if (numero >= 100000 && numero < 1000000) return `$${numero.toString().slice(0, 3)}.${numero.toString().slice(3)}`
 }
 
+export const transformNumberForRender = (number, maximumFractionDigits = 2) => {
+  return number.toLocaleString('es-ES', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits,
+    useGrouping: true
+  })
+}
+
 export function validateFormForProduct ({ img, stock }) {
   if (img === '') {
     alert('Debe subir una imagen')

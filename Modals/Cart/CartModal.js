@@ -2,7 +2,7 @@
 import React, { useContext } from 'react'
 import CartContext from '../../Context/CartContext/CartContext'
 import s from '../../styles/CartModal.module.css'
-import { transformToDinero } from '../../utils/utils'
+import { transformNumberForRender } from '../../utils/utils'
 import CartCard from '../../Components/CartCard'
 import HeadOfSideBars from '../../Components/HeadOfSideBars'
 import Separator from '../../Components/Separator'
@@ -13,11 +13,8 @@ export default function CartModal ({ open, setOpenCart }) {
   const router = useRouter()
 
   const handleShowSubtotal = () => {
-    const subtotal = cart.reduce(
-      (a, b) => a + b.price * b.stock[Object.keys(b.stock)[0]],
-      0
-    )
-    return transformToDinero(subtotal)
+    const subtotal = cart.reduce((a, b) => parseInt(a) + parseInt(b.price) * parseInt(b.stock[Object.keys(b.stock)[0]]), 0)
+    return `$${transformNumberForRender(subtotal)}`
   }
 
   const handleRedirectToSendForm = () => {

@@ -3,7 +3,7 @@ export default function Table ({ rows, columns }) {
         <table className="w-full border-collapse  rounded-sm">
             <thead>
                 <tr className="">
-                    {columns.map((column) => (
+                    {columns?.map((column) => (
                         <th
                             key={column}
                             className="px-4 py-4 underline border-b-2 underline-offset-4 text-center"
@@ -14,7 +14,7 @@ export default function Table ({ rows, columns }) {
                 </tr>
             </thead>
             <tbody>
-                {rows.map((row, i) => (
+                {rows?.map((row, i) => (
                     <tr key={i} className="bg-white">
                         {Object.values(row).map((value, i) => (
                             <td

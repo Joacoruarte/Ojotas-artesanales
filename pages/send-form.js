@@ -12,6 +12,7 @@ import { sendFormSchema } from '../utils/yups'
 export default function SendForm () {
   const { cart, setCart } = useContext(CartContext)
   const [open, setOpen] = useState(false)
+  console.log(cart)
 
   const { register, getValues, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(sendFormSchema)

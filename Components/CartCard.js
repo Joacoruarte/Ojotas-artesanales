@@ -18,7 +18,7 @@ export default function CartCard ({ product, cart, setCart }) {
       if (op === '+') {
         const updateStockProduct = cart.map((product) => {
           if (product._id === id) {
-            return { ...product, stock: { [Object.keys(product.stock)[0]]: quantity + 1 } }
+            return { ...product, stock: { [Object.keys(product.stock)[0]]: parseInt(quantity) + 1 } }
           }
           return product
         })
@@ -28,7 +28,7 @@ export default function CartCard ({ product, cart, setCart }) {
       } else {
         const updateStockProduct = cart.map((product) => {
           if (product._id === id) {
-            return { ...product, stock: { [Object.keys(product.stock)[0]]: quantity - 1 } }
+            return { ...product, stock: { [Object.keys(product.stock)[0]]: parseInt(quantity) - 1 } }
           }
           return product
         })

@@ -26,8 +26,8 @@ class Products {
   async getOneProduct (id) {
     await dbConnect()
     const product = await this.product.findById(id)
-    console.log(id)
-    return product._doc
+    if (product) return product?._doc
+    throw new Error('No se pudo obtener el producto')
   }
 
   async getProductById (res, req, id) {

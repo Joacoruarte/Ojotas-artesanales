@@ -45,9 +45,18 @@ export const shipmentSchema = new Schema({
     default: 'pending',
     enum: ['pending', 'approved', 'rejected']
   },
-  products_id: {
-    type: Array
-  }
+  products: [
+    {
+      id: {
+        type: String,
+        required: true
+      },
+      quantity: {
+        type: String,
+        required: true
+      }
+    }
+  ]
 }, {
   timestamps: true
 })

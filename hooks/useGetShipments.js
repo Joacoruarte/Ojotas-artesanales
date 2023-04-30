@@ -7,17 +7,22 @@ export const useGetShipments = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    setLoading(true)
-    axios.get('/api/shipments')
-      .then((res) => {
-        setShipments(res.data.data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-        setError(err)
-        setLoading(false)
-      })
+    const getShipments = () => {
+      setLoading(true)
+      axios.get('/api/shipments')
+        .then((res) => {
+          setShipments(res.data.data)
+        })
+        .catch((err) => {
+          console.log(err)
+          setError(err)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
+
+    getShipments()
   }, [])
 
   return { shipments, loading, error }
