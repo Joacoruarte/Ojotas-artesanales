@@ -8,7 +8,13 @@ export default async function shipmentsProducts (req, res) {
 
   const products = shipment.products.map(async (productId) => {
     try {
-      return await productsRepository.getOneProduct(productId.id)
+      const product = await productsRepository.getOneProduct(productId.id)
+      return {
+        ...product,
+        stock: {
+          [Object.keys(product.stock)[0]]: productId.quantity
+        }
+      }
     } catch (error) {
       return null
     }

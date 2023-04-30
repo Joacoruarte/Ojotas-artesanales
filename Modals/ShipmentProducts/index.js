@@ -47,14 +47,13 @@ export default function ShipmentProducts ({ shipmentId, close }) {
                         </div>
                         )
                       : (
-                        <div className='flex flex-col gap-2'>
-
+                        <div className='flex flex-col gap-2 overflow-y-scroll max-h-[15rem]'>
                             {products.map((product, i) => (
                                 <div
                                     key={i}
-                                    className="flex justify-start items-center gap-2 border-b"
+                                    className="flex justify-start items-center gap-4 border-b pb-4"
                                 >
-                                    <div className="">
+                                    <div className="shadow-md">
                                         <Image
                                             src={product?.img[0]}
                                             width={90}
@@ -70,7 +69,7 @@ export default function ShipmentProducts ({ shipmentId, close }) {
                                                 <b>{product.name}</b>:
                                             </p>
                                             <p className="text-sm font-montserrat">
-                                                {product.description}
+                                                ({product.description})
                                             </p>
                                         </div>
                                         <p className='text-sm font-montserrat'>Cantidad: {product.stock[Object.keys(product.stock)[0]]}</p>
