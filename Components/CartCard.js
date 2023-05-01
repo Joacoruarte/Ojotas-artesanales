@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Trash from '../Icons/Trash'
-import s from '../styles/CartModal.module.css'
-import { transformToDinero } from '../utils/utils'
 import { useGetStock } from '../hooks/useGetStock'
+import s from '../styles/CartModal.module.css'
+import { transformNumberForRender } from '../utils/utils'
 import Loading from './Loading'
 
-export default function CartCard ({ product, cart, setCart }) {
+export default function CartCard ({ product, cart, setCart, forShipmentForm = false, border }) {
   const [quantity, setQuantity] = useState(product.stock[Object.keys(product.stock)[0]])
   const { getStock, error, loading } = useGetStock()
 
@@ -39,7 +39,7 @@ export default function CartCard ({ product, cart, setCart }) {
     }
   }
   return (
-    <div className='flex flex-col border-b'>
+    <div className={`flex flex-col ${border && 'border-b'} `}>
         {loading && (
           <div className='bg-slate-600 absolute top-0 right-0 h-screen w-[25rem] bg-opacity-20 z-[100000]'>
               <Loading/>
@@ -54,22 +54,25 @@ export default function CartCard ({ product, cart, setCart }) {
                     <span className="text-black text-sm font-montserrat">{product.name} <span className="text-xs">{'('}{product.description}{')'}</span></span>
                     <span className="text-black text-sm font-montserrat">Talle: {Object.keys(product.stock)[0]}</span>
 
-                    <p className="font-montserrat text-sm">{transformToDinero(product.price)}</p>
+                    <p className="font-montserrat text-sm">${transformNumberForRender(product.price)}</p>
 
-                    <div className={s.stockInputs}>
-                          <div onClick={() => addMoreStock({ id: product._id, op: '-' })} className="border border-black cursor-pointer w-10 h-10">-</div>
-                          <div className="border border-black w-10 h-10 text-xs ">{quantity}</div>
-                          <div onClick={() => addMoreStock({ id: product._id, op: '+' })} className="border border-black cursor-pointer w-10 h-10">+</div>
-                    </div>
+                    {forShipmentForm && (
+                      <div className={s.stockInputs}>
+                            <div onClick={() => addMoreStock({ id: product._id, op: '-' })} className="border border-black cursor-pointer w-10 h-10">-</div>
+                            <div className="border border-black w-10 h-10 text-xs ">{quantity}</div>
+                            <div onClick={() => addMoreStock({ id: product._id, op: '+' })} className="border border-black cursor-pointer w-10 h-10">+</div>
+                      </div>
+                    )}
 
               </div>
-
-              <div className="flex flex-1 justify-end">
-                    <Trash className={s.trushIcon} onClick={() => {
-                      localStorage.setItem('cart', JSON.stringify(cart.filter((item) => item._id !== product._id)))
-                      setCart(cart.filter((item) => item._id !== product._id))
-                    }}/>
-              </div>
+              {forShipmentForm && (
+                <div className="flex flex-1 justify-end">
+                      <Trash className={s.trushIcon} onClick={() => {
+                        localStorage.setItem('cart', JSON.stringify(cart.filter((item) => item._id !== product._id)))
+                        setCart(cart.filter((item) => item._id !== product._id))
+                      }}/>
+                </div>
+              )}
 
         </div>
         )}

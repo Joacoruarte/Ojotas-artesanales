@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { FiEdit } from 'react-icons/fi'
-import { TABS, transformToDinero } from '../../utils/utils'
+import { TABS, transformNumberForRender } from '../../utils/utils'
 import Trash from '../../Icons/Trash'
 import axios from '../../utils/configAxios'
 import toast from 'react-hot-toast'
@@ -36,7 +36,7 @@ export default function ProductDashboard ({ products, loading, setEditedProduct,
           objectFit="cover"
         />,
         Nombre: product.name,
-        Precio: transformToDinero(product.price),
+        Precio: `$${transformNumberForRender(product.price)}`,
         Stock: (
             <div className='flex flex-col gap-2'>
               {Object.keys(product.stock).sort().filter(e => e !== 'pid').map((key, i) => (

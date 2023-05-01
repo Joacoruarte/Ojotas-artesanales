@@ -16,7 +16,7 @@ const navigation = [
   { name: 'REGISTRARSE', href: '/register', current: false }
 ]
 
-export default function Navbar ({ home }) {
+export default function Navbar ({ noFixexNav = false }) {
   const [scroll, setScroll] = useState(false)
   const cart = useContext(CartContext)
   const [open, setOpen] = useState(false)
@@ -50,7 +50,7 @@ export default function Navbar ({ home }) {
   return (
     <div className=''>
         {/* PRINCIPIO DE LA NAVBAR */}
-        <nav className={`shadow-sm border-b border-black border-opacity-25 ${scroll && 'shadow-md border-b border-black border-opacity-25'}  border-b border-[#4444] w-full right-0 left-0 my-0 mx-auto fixed z-50 bg-primary`}>
+        <nav className={`shadow-sm border-b border-black border-opacity-25 ${scroll && 'shadow-md border-b border-black border-opacity-25'}  border-b border-[#4444] w-full right-0 left-0 my-0 mx-auto ${noFixexNav ? 'absolute' : 'fixed'} z-50 bg-primary`}>
               {/*  */}
               <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between lg:border-opacity-25">

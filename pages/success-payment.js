@@ -4,7 +4,7 @@ import axios from '../utils/configAxios'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect } from 'react'
 import Layout from '../Components/Layout'
-import { transformToDinero } from '../utils/utils'
+import { transformNumberForRender } from '../utils/utils'
 import s from '../styles/success-payment.module.css'
 import CartContext from '../Context/CartContext/CartContext'
 import SuccesPaymentCard from '../Components/SuccesPaymentCard'
@@ -72,12 +72,12 @@ export default function SuccessPayment () {
                     <div className={'mt-4'}>
                         <h2 className="font-montserrat font-bold ">
                             Total:{' '}
-                            {transformToDinero(
-                              products.reduce(
-                                (a, b) => a + b.unit_price * b.quantity,
-                                0
-                              )
-                            )}
+                            ${transformNumberForRender(
+                          products.reduce(
+                            (a, b) => a + b.unit_price * b.quantity,
+                            0
+                          )
+                        )}
                         </h2>
                     </div>
                 </div>

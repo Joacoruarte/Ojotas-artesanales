@@ -15,7 +15,6 @@ export default function ShipmentProducts ({ shipmentId, close }) {
       .get(`/api/shipment/${shipmentId}/products`)
       .then((res) => {
         setProducts(res.data)
-        console.log(res.data)
       })
       .catch(() => {
         setError(

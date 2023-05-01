@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { transformToDinero } from '../utils/utils'
+import { transformNumberForRender } from '../utils/utils'
 
 export default function SuccesPaymentCard ({ product }) {
   return (
@@ -25,7 +25,7 @@ export default function SuccesPaymentCard ({ product }) {
                 </span>
 
                 <p className="font-montserrat text-sm">
-                    {transformToDinero(product.unit_price)}
+                    ${transformNumberForRender(product.unit_price)}
                 </p>
 
                 <p className="w-10 h-10 text-xs ">

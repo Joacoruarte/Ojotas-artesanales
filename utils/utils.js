@@ -1,10 +1,3 @@
-export function transformToDinero (numero) {
-  if (numero < 1000) return `$${numero}`
-  if (numero >= 1000 && numero < 10000) return `$${numero.toString()[0]}.${numero.toString().slice(1)}`
-  if (numero >= 10000 && numero < 100000) return `$${numero.toString().slice(0, 2)}.${numero.toString().slice(2)}`
-  if (numero >= 100000 && numero < 1000000) return `$${numero.toString().slice(0, 3)}.${numero.toString().slice(3)}`
-}
-
 export const transformNumberForRender = (number, maximumFractionDigits = 2) => {
   return number.toLocaleString('es-ES', {
     minimumFractionDigits: 0,

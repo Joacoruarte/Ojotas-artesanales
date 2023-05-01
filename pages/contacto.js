@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import s from '../styles/login.module.css'
 import { contactSchema } from '../utils/yups'
-import WhatsAppIcon from '../Icons/WhatsAppIcon'
 import emailJs from '@emailjs/browser'
 import toast, { Toaster } from 'react-hot-toast'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
@@ -44,6 +43,7 @@ export default function Contacto () {
         <Layout>
             <Toaster position='top-right'/>
             <div className="w-full mt-2 grid place-content-center h-full">
+                <h2 className='font-montserrat font-bold border-black border-b-2 uppercase mb-4 text-center'>Contacto</h2>
                 <form className={s.formLogin} onSubmit={handleSubmit(onSubmit)}>
                     {/* INPUT NAME */}
                     <div>
@@ -100,24 +100,6 @@ export default function Contacto () {
                     >
                         {loading ? <AiOutlineLoading3Quarters className={s.loading_icon} /> : 'ENVIAR'}
                     </button>
-
-                    {/* OR */}
-                    <div className='m-auto'>
-                        <div className="flex items-center">
-                            <span className="sm:w-36 w-28 h-[0.5px] bg-[#ccc]"></span>
-                            <span className="mx-2 mt-1">O</span>
-                            <span className="sm:w-36 w-28 h-[0.5px] bg-[#ccc]"></span>
-                        </div>
-
-                        <a
-                            href="https://wa.me/5492304500203"
-                            className="flex items-center justify-center w-48 m-auto px-4 py-2 rounded-3xl mt-4 text-white font-semibold bg-[#128c7e]"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <WhatsAppIcon />
-                        </a>
-                    </div>
                 </form>
             </div>
         </Layout>
