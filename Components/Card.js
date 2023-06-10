@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
-import { transformNumberForRender } from '../utils/utils'
+// import { transformNumberForRender } from '../utils/utils'
 import s from '../styles/Card.module.css'
 
 export default function Card ({ id, name, alt, img, price }) {
@@ -25,7 +25,7 @@ export default function Card ({ id, name, alt, img, price }) {
                 {name}
             </h3>
           </Link>
-          <p className="text-lg font-bold text-gray-900">${transformNumberForRender(price)}</p>
+          {/* <p className="text-lg font-bold text-gray-900">${transformNumberForRender(price)}</p> */}
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ import Layout from '../../Components/Layout'
 import CartContext from '../../Context/CartContext/CartContext'
 import { useGetProductDetail } from '../../hooks/useGetProductDetail'
 import s from '../../styles/ProductDetail.module.css'
-import { transformNumberForRender } from '../../utils/utils.js'
+// import { transformNumberForRender } from '../../utils/utils.js'
 import toast, { Toaster } from 'react-hot-toast'
 import Carousel from '../../Components/Carousel'
 import Sizes from '../../Components/Sizes'
@@ -101,9 +101,9 @@ export default function ProductDetail () {
                     <h2 className="font-montserrat font-normal text-[1.5rem]">
                       {product?.name}
                     </h2>
-                    <p className="font-extrabold text-[2rem] font-montserrat">
+                    {/* <p className="font-extrabold text-[2rem] font-montserrat">
                       ${transformNumberForRender(product?.price)}
-                    </p>
+                    </p> */}
                     {/* <span className="font-montserrat uppercase">
                       <b>24</b> cuotas de <b>$726,23</b>
                     </span> */}

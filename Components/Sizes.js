@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Sizes ({ product, selectedSize, setSelectedSize, setOpen }) {
   const handleSize = (size) => {
-    if (product.stock[size].quantity !== 0) {
+    if (Number(product.stock[size].quantity) !== 0) {
       if (selectedSize.size === size) return setSelectedSize({ ...selectedSize, size: '', stock: 0 })
       return setSelectedSize({ ...selectedSize, size, _id: product.stock[size]._id, stock: 1 })
     } else {
@@ -22,7 +22,7 @@ export default function Sizes ({ product, selectedSize, setSelectedSize, setOpen
                            key={size}
                            onClick={() => handleSize(size)}
                            className={`flex ${
-                              product.stock[size].quantity === 0
+                              Number(product.stock[size].quantity) === 0
                               ? 'bg-gray-100'
                               : selectedSize.size === size
                               ? 'bg-black text-white'
