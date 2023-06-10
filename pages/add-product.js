@@ -74,7 +74,7 @@ export default function CreateProducts ({
       stock: transformStock
     })
 
-    if (validateFormForProduct({ img, stock: product.stock })) return
+    if (validateFormForProduct({ img, stock: product.stock, edit })) return
 
     if (Object.keys(edit).length > 0) {
       handleEditProduct(product)

@@ -6,7 +6,7 @@ export const transformNumberForRender = (number, maximumFractionDigits = 2) => {
   })
 }
 
-export function validateFormForProduct ({ img, stock }) {
+export function validateFormForProduct ({ img, stock, edit }) {
   if (img === '') {
     alert('Debe subir una imagen')
     return true
@@ -16,7 +16,7 @@ export function validateFormForProduct ({ img, stock }) {
   const limit = Object.keys(stock).length
   Object.keys(stock).forEach((item) => stock[item] === 0 ? count++ : null)
 
-  if (count === limit) {
+  if (count === limit && !edit && Object.keys(edit).length === 0) {
     alert('Debe agregar al menos un stock')
     return true
   }
