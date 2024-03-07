@@ -8,19 +8,29 @@ class Products {
   }
 
   async getAllProducts (res, req) {
-    await dbConnect()
-    let products = await this.product.find({})
-    // REDUCIMOS EL ARRAY DE PRODUCTOS PARA QUE NO SE REPITAN LOS PRODUCTOS CON MISMO PID Y SUMAMOS EL STOCK DE CADA PRODUCTO
-    products = Object.values(products.reduce((acc, cur) => {
-      if (acc[cur.pid]) {
-        acc[cur.pid].stock = { ...acc[cur.pid].stock, ...cur.stock }
-      } else {
-        acc[cur._doc.pid] = { ...cur._doc }
-      }
-      return acc
-    }, {}))
+    try {
+      await dbConnect()
+    } catch (error) {
+      console.log('Error al conectar a la base de datos', error)
+      return res.status(400).json({ error: 'Error al conectar a la base de datos' })
+    }
+    try {
+      let products = await this.product.find({})
+      // REDUCIMOS EL ARRAY DE PRODUCTOS PARA QUE NO SE REPITAN LOS PRODUCTOS CON MISMO PID Y SUMAMOS EL STOCK DE CADA PRODUCTO
+      products = Object.values(products.reduce((acc, cur) => {
+        if (acc[cur.pid]) {
+          acc[cur.pid].stock = { ...acc[cur.pid].stock, ...cur.stock }
+        } else {
+          acc[cur._doc.pid] = { ...cur._doc }
+        }
+        return acc
+      }, {}))
 
-    return res.status(200).json({ success: true, count: products.length, data: products })
+      return res.status(200).json({ success: true, count: products.length, data: products })
+    } catch (error) {
+      console.log('Error al encontrar los productos', error)
+      return res.status(400).json({ error: 'No se pudo obtener los productos' })
+    }
   }
 
   async getOneProduct (id) {
