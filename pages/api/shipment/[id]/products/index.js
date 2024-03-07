@@ -8,7 +8,7 @@ export default async function shipmentsProducts (req, res) {
 
   const products = shipment.products.map(async (productId) => {
     try {
-      const product = await productsRepository.getOneProduct(productId.id)
+      const product = await productsRepository.getOneProduct({ id: productId.id })
       return {
         ...product,
         stock: {
