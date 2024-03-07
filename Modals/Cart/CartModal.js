@@ -56,7 +56,7 @@ export default function CartModal ({ open, setOpenCart }) {
                 </div>
             )}
             {/* SUBTOTAL */}
-            <div className='absolute bottom-0 w-full'>
+            <div className="absolute bottom-0 w-full">
                 <div className={`${s.subTotal} border-b border-t`}>
                     <span className="text-black text-xs font-montserrat">
                         SUBTOTAL{' '}
@@ -69,11 +69,18 @@ export default function CartModal ({ open, setOpenCart }) {
                     </p>
                 </div>
 
-                <div onClick={() => handleRedirectToSendForm()} className="w-full hover:bg-[#444] bg-black transition-all duration-300 cursor-pointer flex items-center justify-center py-2">
-                    <p
-                        className="font-montserrat text-white font-extralight"
-
-                    >
+                <div
+                    onClick={() => {
+                      if (cart.length === 0) return
+                      handleRedirectToSendForm()
+                    }}
+                    className={`w-full  ${
+                        cart.length === 0
+                            ? 'bg-gray-500 cursor-not-allowed'
+                            : 'bg-black cursor-pointer hover:bg-[#444]'
+                    }  transition-all duration-300  flex items-center justify-center py-2`}
+                >
+                    <p className="font-montserrat text-white font-extralight">
                         INICIAR COMPRA
                     </p>
                 </div>
