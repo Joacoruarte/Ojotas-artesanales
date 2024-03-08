@@ -81,6 +81,8 @@ export async function getServerSideProps () {
     console.log('Get products error', error)
   }
 
+  console.log('Products', products)
+
   return {
     props: {
       products
