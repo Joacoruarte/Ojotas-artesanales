@@ -24,8 +24,12 @@ export default function Login () {
   }, [user, router])
 
   const onSubmit = async (data) => {
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
     try {
-      const res = await axios.post('/api/login', { email: data.email, password: data.password })
+      const res = await axios(baseURL).post('/api/login', { email: data.email, password: data.password })
       if (res.data.token) {
         setUser(res.data)
         localStorage.setItem('user', JSON.stringify(res.data))

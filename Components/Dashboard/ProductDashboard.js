@@ -15,7 +15,11 @@ export default function ProductDashboard ({ products, loading, setEditedProduct,
   }
 
   const deleteProduct = (product) => {
-    axios.delete('/api/products', { data: { pid: product?.pid } })
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
+    axios(baseURL).delete('/api/products', { data: { pid: product?.pid } })
       .then(res => {
         toast.success(res.data.success)
         refetch()

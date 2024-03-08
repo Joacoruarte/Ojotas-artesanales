@@ -23,8 +23,12 @@ export default function SendForm () {
   }
 
   const handleBuyProducts = async () => {
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
     try {
-      const res = await axios.post('/api/mercado-pago', { cart, form: getValues() })
+      const res = await axios(baseURL).post('/api/mercado-pago', { cart, form: getValues() })
       window.location.replace(res.data)
     } catch (error) {
       console.log(error)

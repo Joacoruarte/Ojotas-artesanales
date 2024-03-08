@@ -71,17 +71,17 @@ export default function Home ({ products }) {
   )
 }
 
-export async function getServerSideProps () {
+export async function getServerSideProps ({ req: { headers: { host } } }) {
   let products = []
+  const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+  const baseURL = `http${secure}://${host}`
 
   try {
-    const res = await axios.get('/api/products')
+    const res = await axios(baseURL).get('/api/products')
     products = await res?.data?.data
   } catch (error) {
     console.log('Get products error', error)
   }
-
-  console.log('Products', products)
 
   return {
     props: {

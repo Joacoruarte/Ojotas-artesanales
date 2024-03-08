@@ -11,7 +11,11 @@ export default function ShipmentProducts ({ shipmentId, close }) {
 
   const getProductsByShipmentId = (shipmentId) => {
     setLoading(true)
-    axios
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
+    axios(baseURL)
       .get(`/api/shipment/${shipmentId}/products`)
       .then((res) => {
         setProducts(res.data)

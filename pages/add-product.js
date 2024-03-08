@@ -33,7 +33,11 @@ export default function CreateProducts ({
   })
 
   const handleEditProduct = (product) => {
-    axios
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
+    axios(baseURL)
       .put('/api/products', product)
       .then((res) => {
         refetch()
@@ -47,7 +51,11 @@ export default function CreateProducts ({
   }
 
   const handleCreateProduct = (product) => {
-    axios
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
+    axios(baseURL)
       .post('/api/products', {
         ...product,
         img

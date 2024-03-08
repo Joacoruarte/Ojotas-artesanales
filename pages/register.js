@@ -16,7 +16,11 @@ export default function Register () {
   })
 
   const onSubmit = async (data) => {
-    const user = await axios.post('/api/user', {
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
+    const user = await axios(baseURL).post('/api/user', {
       name: data.name,
       email: data.email,
       password: data.password,

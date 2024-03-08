@@ -15,10 +15,15 @@ export default function SuccessPayment () {
   const payment_id = router.query.payment_id
   const [products, setProducts] = React.useState([])
   const [loading, setLoading] = React.useState(true)
+
   useEffect(() => {
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
     if (payment_id) {
       setLoading(true)
-      axios
+      axios(baseURL)
         .get(`/api/successPayment?payment_id=${payment_id}`)
         .then((res) => {
           if (res.data) {

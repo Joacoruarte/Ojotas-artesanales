@@ -8,8 +8,12 @@ export const useGetProductDetail = (id) => {
 
   useEffect(() => {
     if (id) {
+      const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+      const regex = /^https?:\/\/([^\/]+)/
+      const host = window.location.href.match(regex)?.[1]
+      const baseURL = `http${secure}://${host}`
       setLoading(true)
-      axios
+      axios(baseURL)
         .get(`/api/product/${id}`)
         .then((product) => {
           console.log(product.data)

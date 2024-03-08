@@ -5,11 +5,15 @@ export const useGetShipments = () => {
   const [shipments, setShipments] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+  const regex = /^https?:\/\/([^\/]+)/
+  const host = window.location.href.match(regex)?.[1]
+  const baseURL = `http${secure}://${host}`
 
   useEffect(() => {
     const getShipments = () => {
       setLoading(true)
-      axios.get('/api/shipments')
+      axios(baseURL).get('/api/shipments')
         .then((res) => {
           setShipments(res.data.data)
         })
