@@ -5,13 +5,13 @@ export const useGetProducts = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const secure = process.env.NODE_ENV === 'production' ? 's' : ''
-  const regex = /^https?:\/\/([^\/]+)/
-  const host = window.location.href.match(regex)?.[1]
-  const baseURL = `http${secure}://${host}`
 
   useEffect(() => {
     setLoading(true)
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
     axios(baseURL)
       .get('/api/products')
       .then((products) => {
@@ -26,6 +26,10 @@ export const useGetProducts = () => {
 
   const refetch = () => {
     setLoading(true)
+    const secure = process.env.NODE_ENV === 'production' ? 's' : ''
+    const regex = /^https?:\/\/([^\/]+)/
+    const host = window.location.href.match(regex)?.[1]
+    const baseURL = `http${secure}://${host}`
     axios(baseURL)
       .get('/api/products')
       .then((products) => {

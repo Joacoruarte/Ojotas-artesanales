@@ -69,8 +69,7 @@ export default function Dashboard () {
                             )}
                             active={tab === TABS.SHIPMENTS}
                             handleTab={() =>
-                              tab !== TABS.SHIPMENTS &&
-                                setTab(TABS.SHIPMENTS)
+                              tab !== TABS.SHIPMENTS && setTab(TABS.SHIPMENTS)
                             }
                             text="Envios"
                         />
@@ -104,7 +103,7 @@ export default function Dashboard () {
                     {Object.keys(editedProduct).length === 0
                       ? (
                         <div className="grid place-content-center w-full h-[80vh]">
-                            <div className='flex flex-col gap-4'>
+                            <div className="flex flex-col gap-4">
                                 <h1 className="text-2xl font-montserrat">
                                     No hay productos para editar
                                 </h1>
@@ -118,13 +117,13 @@ export default function Dashboard () {
                         </div>
                         )
                       : (
-                            <CreateProducts
-                                edit={editedProduct}
-                                setEdit={setEditedProduct}
-                                refetch={refetch}
-                                setTab={() => setTab(TABS.PRODUCTS)}
-                                tab={tab}
-                            />
+                        <CreateProducts
+                            edit={editedProduct}
+                            setEdit={setEditedProduct}
+                            refetch={refetch}
+                            setTab={() => setTab(TABS.PRODUCTS)}
+                            tab={tab}
+                        />
                         )}
                 </div>
             )}
